@@ -1,0 +1,60 @@
+$colors: (
+    primary: (
+        base: #45C58B,
+        light: #e5eeff,
+        hover: #37A975,
+        grad: linear-gradient(90deg, #1e50a6 20%, #0a3b8c 100%),
+        dark: linear-gradient(90deg, #112846 0%, #05172e 100%),
+        sky: #d8eaf0
+    ),
+    secondary: (
+        base: #1ABF75,
+        light: transparent,
+        hover: #E7F9F1,
+    ),
+    primary2: (
+        base: #45B0C5,
+        light: #e5eeff,
+        hover: #328A9B,
+    ),
+    secondary2: (
+        base: #45B0C5,
+        light: transparent,
+        hover: #F3FAFF,
+    ),
+    success: (
+        base: #688b06,
+        light: #f5ffd9,
+        dark: linear-gradient(90deg, #389d18 0%, #237d06 100%),
+        grad: linear-gradient(90deg, #88af1b 0%, #688b06 100%),
+        grad-vv: linear-gradient(90deg, #688b06 0%,  #88af1b 100%)
+    ),
+    danger: (
+        base: #DB2B2B,
+        light: #eadbdd,
+        grad: linear-gradient(90deg, #b01b30 0%, #8c0618 100%)
+    ),
+    warning: (
+        base: #c45405,
+        grad: linear-gradient(90deg, #fa7517 0%, #c45405 100%)
+    ),
+    font: (
+        base: #1E2631,
+        primary: #333,
+        light: #fff,
+        sky: #0097cf,
+        field-title: #666666,
+        secondary: #72787F
+    ),
+    container: (
+        base: #fff,
+        border: #DDE1E5,
+        bg: #EAEDF0
+    ),
+    table: (
+        heading: #E5E5E5
+    )
+);
+@function color($color, $type: 'base') {
+    @return map-get(map-get($colors, $color), $type);
+}

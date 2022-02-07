@@ -1,0 +1,40 @@
+<?php
+    use Lns\Sb\Lib\Lang\Lang;
+    $_lang = new Lang();
+?>
+<div class="signin-container">
+    <div class="offset-4 col-md-4 peer pX-40 pY-80 h-100 scrollable pos-r" style="min-width:320px">
+        <h4 class="text-center fw-600 c-grey-900 mB-0"><?= $_lang->getLang('hey_good_to_see_you_again'); ?></h4>
+        <h6 class="text-center fw-300 c-grey-900 mB-25"><?= $_lang->getLang('log_in_to_get_going'); ?></h6>
+        <div class="signinform-wrapper">
+            <form id="needs-validation" novalidate action="<?= $this->getAdminUrl('login/auth') ?>" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="text-normal text-dark"><?= $_lang->getLang('email'); ?></label>
+                    <input type="email" class="form-control" name="email" placeholder="juan.delacruz@gmail.com" required>
+                    <div class="invalid-feedback"><?= $_lang->getLang('please_enter_an_email'); ?></div>
+                </div>
+                <div class="form-group">
+                    <label class="text-normal text-dark"><?= $_lang->getLang('password'); ?></label>
+                    <input type="password" class="form-control" name="password" placeholder="password" required>
+                    <div class="invalid-feedback"><?= $_lang->getLang('please_enter_you_password'); ?></div>
+                </div>
+                <div class="form-group">
+                    <div class="peers ai-c jc-sb fxw-nw">
+                        <div class="peer">
+                            <div class="checkbox checkbox-circle checkbox-info peers ai-c">
+                                <input type="checkbox" id="inputCall1" name="remember_user" class="peer">
+                                <label for="inputCall1" class="peers peer-greed js-sb ai-c"><span class="peer peer-greed"><?= $_lang->getLang('remember_me'); ?></span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success" value="Login"/>
+                </div> 
+                <div class="form-group">
+                    <a href="<?= $this->getAdminUrl('forgotpassword') ?>" class="text-success text-dark"><?= $_lang->getLang('forgot_password'); ?></a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

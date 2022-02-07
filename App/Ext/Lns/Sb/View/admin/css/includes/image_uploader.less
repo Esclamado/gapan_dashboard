@@ -1,0 +1,47 @@
+.lns-image-controls {
+	.canvas_file_picker {
+		border: 1px solid @primaryColor;
+		width: 100%;
+		height: auto;
+		padding: 27px 15px 27px 15px;
+		box-sizing: border-box;
+		text-align: center;
+		color: @primaryColor;
+		cursor: pointer;
+		.radius-all(5px);
+
+		.canvas_file_picker_icon {
+			font-size: 38px;
+		}
+
+		.canvas_file_picker_caption {
+			p {
+				margin: 0;
+			}
+		}
+	}
+	.lns-image-action {
+		margin-left: 5px;
+		margin-right: 5px;
+		height: 45px;
+	}
+	.canvas_file_picker.dragover {
+		border: 1px solid @primaryColorHover;
+		background: @primaryColorHover;
+		color: #ffffff;
+	}
+}
+
+.lns-image-controls:hover {
+	.canvas_file_picker {
+		border: 1px solid @primaryColorHover;
+		background: @primaryColorHover;
+		color: #ffffff;
+	}
+}
+
+.site-images {
+	img {
+		margin: 0px 0px 15px 0px;
+	}
+}

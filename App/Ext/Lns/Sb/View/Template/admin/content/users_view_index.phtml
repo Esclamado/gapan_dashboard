@@ -1,0 +1,139 @@
+<?php
+    use Lns\Sb\Lib\Lang\Lang;
+    $_user = $this->getSingleUser();
+    $_userProfile =  $_user->getUserProfile();
+    $_lang = new Lang();
+?>
+<div class="container-fluid">
+	<div class="clearfix mB-20">
+		<h4 class="c-grey-900 mB-0 pull-left">View User</h4>	
+		<a href="<?= $this->getAdminUrl('/users'); ?>">
+			<button type="button" class="btn cur-p btn-secondary pull-right">
+				<?= $_lang->getLang('go_back_to_list'); ?>
+			</button>
+		</a>
+	</div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="bgc-white bd bdrs-3 p-20 mB-20">
+            <div class="row">
+                <div class="col-md-12">
+                    <form>
+                        <div class="form-group row mb-0">
+                            <label class="col-4 col-form-label"><strong>User ID:</strong></label> 
+                            <label class="col-8 col-form-label"><?= $_user->getData('id'); ?></label> 
+                        </div>
+
+                        <hr>
+
+                        <div class="form-group row mb-0">
+                            <label class="col-4 col-form-label"><strong>First Name:</strong></label> 
+                            <label class="col-8 col-form-label"><?= $_userProfile->getData('first_name'); ?></label> 
+                        </div>
+                        <div class="form-group row mb-0">
+                            <label class="col-4 col-form-label"><strong>Last Name:</strong></label> 
+                            <label class="col-8 col-form-label"><?= $_userProfile->getData('last_name'); ?></label> 
+                        </div>
+
+                        <hr>
+
+                        <div class="form-group row mb-0">
+                            <label class="col-4 col-form-label"><strong>User Type:</strong></label> 
+                            <?php 
+                                $_userType = 'Normal User';
+                                if($_user->getData('userType') == 1){
+                                    $_userType = 'Super Admin';
+                                } else if($_user->getData('userType') == 2){
+                                    $_userType = 'Admin';
+                                }
+                            ?>
+                            <label class="col-8 col-form-label"><?= $_userType; ?></label> 
+                        </div>
+                        <div class="form-group row mb-0">
+                            <label class="col-4 col-form-label"><strong>Username:</strong></label> 
+                            <label class="col-8 col-form-label"><?= $_user->getData('username'); ?></label> 
+                        </div>
+                        <div class="form-group row mb-0">
+                            <label class="col-4 col-form-label"><strong>E-mail:</strong></label> 
+                            <label class="col-8 col-form-label"><?= $_user->getData('email'); ?></label> 
+                        </div>
+                        <div class="form-group row mb-0">
+                            <label class="col-4 col-form-label"><strong>Date Created:</strong></label> 
+                            <label class="col-8 col-form-label"><?= $_user->getData('created_at'); ?></label> 
+                        </div>
+                        <div class="form-group row mb-0">
+                            <label class="col-4 col-form-label"><strong>Date Updated:</strong></label> 
+                            <label class="col-8 col-form-label"><?= $_user->getData('update_at'); ?></label> 
+                        </div>
+
+                        <hr>
+                        
+                        <div class="form-group row mb-0">
+                            <label class="col-4 col-form-label"><strong>User Status:</strong></label> 
+                            <label class="col-8 col-form-label">
+                                <?php if($_user->getData('userStatus') == 1){ ?>
+                                    <span class="badge badge-success">Active</span>
+                                <?php } else{ ?>
+                                    <span class="badge badge-danger">Inactive</span>
+                                <?php } ?>
+                            </label> 
+                        </div>
+                        <div class="form-group row mb-0">
+                            <label class="col-4 col-form-label"><strong>Activation Status:</strong></label> 
+                            <label class="col-8 col-form-label">
+                                <?php if($_user->getData('activationStatus') == 1){ ?>
+                                    <span class="badge badge-success">Active</span>
+                                <?php } else{ ?>
+                                    <span class="badge badge-danger">Inactive</span>
+                                <?php } ?>
+                            </label> 
+                        </div>
+                        
+                        <hr>
+
+                        <div class="form-group row mb-0">
+                            <div class="offset-4 col-8">
+                                <a href="<?= $this->getAdminUrl('/users/edit/?userId=' . $_user->getData('userId')); ?>">
+                                    <button type="button" class="btn cur-p btn-primary">
+                                        Edit User
+                                    </button>
+                                </a>
+                                <button type="button" class="btn cur-p btn-secondary" data-toggle="modal" data-target="#deleteUserModal">
+                                    Delete User
+                                </button>
+                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="deleteUserModalLongTitle">Delete User</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to delete <strong><?= $_user->getData('firstname') . ' ' . $_user->getData('lastname') ?></strong>'s account?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+            <form action="<?= $this->getAdminUrl('/users/delete'); ?>" method="POST">
+                <input type="hidden" name="userId" value="<?= $_user->getData('userId') ?>">
+                <input type="submit" value="Delete" class="btn btn-danger">
+            </form>
+        </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,123 @@
+<?php
+$dailyhouseharvests = $this->_dailyhouseharvest->getDailyhouseharvest();
+$medicines = $this->_medicine->getMedicines();
+$houses = $this->_house->getHouses();
+?>
+
+<div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="card bd bdrs-3 pX-30 pY-25 mB-20 mB-20">
+                        Prescribed Medicine per Day
+                    <div class="row">
+                        <div class="col-lg-1">
+                            Day
+                        </div>
+                        <div class="col-lg-11">
+                            Medicine Name
+                        </div>
+                    </div>
+                    <div class="row">
+                                <div class="col-lg-1">
+                                    1
+                                </div>
+                                <div class="col-lg-7">
+                                    <input 
+                                        value="" 
+                                        name="" 
+                                        type="text" 
+                                        class="form-control" 
+                                        id="input-testing" 
+                                        placeholder="" 
+                                        required
+                                    />
+                                </div>
+                                <div class="col-lg-2">
+                                    Edit
+                                </div>
+                                <div class="col-lg-2">
+                                    Clear
+                                </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-lg-1">
+                                <?= $date = date("j")+1; ?>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="row">
+                                    <?php $i = 0;
+                                    foreach ($medicines as $medicine) : ?>
+                                        <div class="peers ai-c mB-15 col-lg-6">
+                                            <div class="row">
+                                                <div class="checkbox checkbox-info col-md-12 form-group">
+                                                    <input 
+                                                        type="checkbox" 
+                                                        id="med-<?= $medicine->getData('id'); ?>"
+                                                        name='medicine[<?= $i ?>][medicineId]'
+                                                        class="" 
+                                                        value="<?= $medicine->getData('id'); ?>"
+                                                    /> 
+                                                    <label for="med-<?= $medicine->getData('id'); ?>" class="">
+                                                        <span class="peer peer-greed">
+                                                            <?= $medicine->getData('medicine'); ?>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 form-group">
+                                                    <label for="input-days">Please enter consumption *</label> 
+                                                    <input 
+                                                        value=""  
+                                                        name='medicine[<?= $i ?>][medicineValue]'
+                                                        type="number" 
+                                                        class="form-control" 
+                                                        id="medicined" 
+                                                        placeholder=""
+                                                        onchange="getData()"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php $i++; endforeach ?>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                Save
+                            </div>
+                            <div class="col-lg-2">
+                                Clear
+                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <a href="<?= $this->getAdminUrl('') ?>">
+                                <button type="button" class="btn cur-p btn-success">
+                                    Add Daily Medication
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                        <div class="bottom-line2"></div>
+                    <div class="col-lg-12">
+                        <div class="col-lg-2 pull-right">
+                                <button type="submit" class="btn cur-p btn-success">
+                                    Add Record
+                                </button>
+                        </div>
+
+                        <div class="col-lg-1 pull-right">
+                            <a href="<?= $this->getAdminUrl('/feedsandmedicine/action/add') ?>" class="btn cur-p">
+                                    Cancel 
+                            </a>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+
+<script type="text/javascript">
+
+    function getData() {
+        var houseSelector = document.getElementById('medicined');
+        document.getElementById("input-testing").value = houseSelector.value;
+    }
+
+</script>

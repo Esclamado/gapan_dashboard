@@ -1,0 +1,12 @@
+/App/Theme/*/
+/Var/*/
+/etc/*
+!/etc/.htaccess
+/public/*
+/public/deploy*
+/public/generation.php
+!/public/sys
+/App/Ext/Lns/Gpn/View/images/*
+/App/Ext/Lns/Sb/View/images/*
+.user.ini
+php.ini

@@ -1,0 +1,75 @@
+<?php
+    use Lns\Sb\Lib\Lang\Lang;
+    $template = $this->getEmailById();
+    $_lang = new Lang();
+?>
+<div class="row">
+    <div class="col-md-12">
+        <div class="clearfix mB-20">
+			<h4 class="c-grey-900 mB-0 pull-left"><?= $_lang->getLang('email'); ?></h4>	
+		</div>
+    </div>
+    <div class="col-md-8">
+        <div class="card bd bdrs-3 pX-30 pY-25 mB-20 mB-20">
+            <h6 class="c-grey-900 mB-20"><?= $_lang->getLang('create_email_template'); ?></h6>
+            <form id="needs-validation" novalidate action="<?= $this->getAdminUrl('/settings/templates/save'); ?>" method="POST" enctype="multipart/form-data" >
+				<div class="form-group row">
+                    <input type="hidden" name="id" value="<?= isset($template['id']) ? $template['id']:'';?>">
+                    <label class="col-sm-3 col-form-label" for="inputTemplateName"><?= $_lang->getLang('template_name'); ?></label> 
+					<div class="col-md-6">
+						<input name="template_name" value="<?= isset($template['template_name']) ? $template['template_name']:'';?>" type="text" class="form-control" id="inputTemplateName" placeholder="<?= $_lang->getLang('template_name'); ?>" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="inputSubject"><?= $_lang->getLang('email_from_name'); ?></label> 
+                    <div class="col-md-9">
+                        <input name="from_name" type="text" value="<?= isset($template['from_name']) ? $template['from_name']:'';?>" class="form-control" id="inputSubject" placeholder="<?= $_lang->getLang('email_from_name_placeholder'); ?>" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="inputSubject"><?= $_lang->getLang('email_from'); ?></label> 
+                    <div class="col-md-9">
+                        <input name="email" type="text" value="<?= isset($template['email']) ? $template['email']:'';?>" class="form-control" id="inputSubject" placeholder="<?= $_lang->getLang('email'); ?>" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="inputSubject"><?= $_lang->getLang('subject'); ?></label> 
+					<div class="col-md-9">
+						<input name="subject" type="text" value="<?= isset($template['subject']) ? $template['subject']:'';?>" class="form-control" id="inputSubject" placeholder="<?= $_lang->getLang('subject'); ?>" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="ckEditor"><?= $_lang->getLang('email_template'); ?></label> 
+					<div class="col-md-9">
+						<textarea name="template" class="form-control" id="ckEditor"><?= isset($template['template']) ? $template['template']:'';?>
+                        </textarea>
+					</div>
+                </div>
+				<button class="btn btn-primary float-right" type="submit"><?= $_lang->getLang('save_changes'); ?></button>
+			</form>
+        </div>
+    </div>
+	<div class="col-md-4">
+	    <div class="card bd bdrs-3 pX-30 pY-25 mB-20">
+            <div class="card-head">
+                <h6 class="c-grey-900 mB-20">Variables</h6>
+            </div>
+            <div class="card-body p-0">
+                <span class="badge badge-success mB-10">user_first_name</span><br>
+                <span class="badge badge-success mB-10">user_last_name</span><br>
+                <span class="badge badge-success mB-10">app_name</span><br>
+                <span class="badge badge-success mB-10">user_email</span><br>
+                <span class="badge badge-success mB-10">user_address</span><br>
+                <span class="badge badge-success mB-10">website_link</span><br>
+            </div>
+        </div> 
+	</div>
+</div>
+
+<script type="text/javascript">
+	requirejs([
+		'lns/sb/admin/js/email/email_template'
+	], function(email_template){
+        var h = new email_template();
+	});
+</script>

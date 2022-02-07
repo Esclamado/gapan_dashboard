@@ -1,0 +1,152 @@
+<?php
+use Lns\Sb\Lib\Entity\Db\Users; 
+use Lns\Sb\Lib\Entity\Db\Notification; 
+use Of\Http\Request;
+use Of\Http\Url;
+
+$_request = new Request();
+$_url = new Url();
+
+$_userModel = new Users($_request);
+$user = $_userModel->getLoggedInUser(); 
+$profile = $user->getUserProfile();
+$profileImage = $profile->getProfilePicture();
+$profImageUrl = "https://i.stack.imgur.com/l60Hf.png";
+if($profileImage){
+    $profImageUrl = $this->getUrl($profileImage->getData('filepath') . '/' . $profileImage->getData('filename'));
+}
+
+$_userID = $user->getData('id');
+/*$profileLink = $this->getAdminUrl('users/userprofile');
+if($user->getData('user_role_id' == 2)){*/
+    $profileLink = $this->getAdminUrl("/users/edit", ['userId'=>$_userID]);
+/*}*/
+
+$_notificationModel = new Notification($_request);
+$_unreadNotifCount = $_notificationModel->getUnreadNotifCount();
+$_readNotifUrl = $_url->getUrl('/api/notification/read');
+?>
+<ul class="nav-right">
+    <li class="notifications dropdown divider-left">
+        <?php if($_unreadNotifCount){ ?>
+            <span class="counter bgc-red"><?= $_unreadNotifCount ?></span> 
+        <?php } ?>
+        <a href="" class="dropdown-toggle no-after" data-toggle="dropdown">
+            <i class="ti-bell"></i>
+        </a>
+        <ul class="dropdown-menu">
+            <li class="pX-20 pY-15 bdB"><i class="ti-bell pR-10"></i> <span class="fsz-sm fw-600 c-grey-900">Notifications</span></li>
+            <li>
+                <ul class="notification-container ovY-a pos-r scrollable lis-n p-0 m-0 fsz-sm">                    
+                </ul>
+            </li>
+            <li class="viewallnotif d-none pX-20 pY-15 ta-c"><span><a href="<?= $this->getAdminUrl('notifications') ?>" class="c-grey-600 cH-blue fsz-sm td-n">View All Notifications <i class="ti-angle-right fsz-xs mL-10"></i></a></span></li>
+        </ul>
+    </li>
+    <li class="dropdown divider-left">
+        <a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown">
+            <div class="peer mR-10">
+                <div class="w-2r h-2r" style="background-image: url(<?= $profImageUrl ?>); background-size: cover; background-position: center; border-radius: 50%;">
+                </div>
+            </div>
+            <div class="peer">
+                <span class="fsz-sm c-grey-900"><?= $profile->getFullName() ? $profile->getFullName() : 'Unknown' ?></span>
+            </div>
+        </a>
+        <ul class="dropdown-menu fsz-sm">
+            <?php
+            /*<li>
+                <a href="" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+                    <i class="ti-settings mR-10"></i> <span>Setting</span>
+                </a>
+            </li>*/
+            ?>
+            <li>
+                <a href="<?= $profileLink ?>" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+                    <i class="ti-user mR-10"></i> <span>Profile</span>
+                </a>
+            </li>
+            <?php
+            /*<li>
+                <a href="email.html" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+                    <i class="ti-email mR-10"></i> <span>Messages</span>
+                </a>
+            </li>*/
+            ?>
+            <li role="separator" class="divider"></li>
+            <li>
+                <a href="<?= $this->getAdminUrl('logout') ?>" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+                    <i class="ti-power-off mR-10"></i> <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+
+
+<script type="text/javascript">
+    require(['jquery'],
+    function($){
+        $(document).ready(function(){
+            $('.notifications.dropdown .dropdown-toggle').on('click', function(){
+                if(!$(this).parent().find('.dropdown-menu').hasClass('show')){
+                    $.ajax({
+                        url: "<?= $_url->getUrl('/api/notification/get') ?>",
+                        method: 'GET',
+                        data: {
+                            page: 1,
+                            limit: 5,
+                        },
+                        beforeSend: function(){
+                            var notifContainer = $('.notification-container');
+                            var noNotif = '<li class="py-3 text-center">' +
+                                                '<span><i>Fetching notifications...</i></span>' +
+                                            '</li>';
+                            notifContainer.html(noNotif);
+                        },
+                        success: function(response){
+                            console.log(response);
+
+                            if(response.error == 0){
+                                var notifContainer = $('.notification-container');
+                                notifContainer.html('');
+                                var data = response.data;
+                                if(data.total > 0){
+                                    $('.viewallnotif').removeClass('d-none');
+                                    $.each(data.notifications, function(index, notif){
+                                        var notif = '<li>' +
+                                                        '<a href="<?= $_readNotifUrl ?>/?notifId='+ notif.notifId +'" class="peers fxw-nw td-n pX-20 pY-10 bdB c-grey-800 cH-blue bgcH-grey-100" '+ (!notif.is_read ? 'style="background-color:#efefef;"' : '') +'>' +
+                                                            '<div class="peer mR-15">' + 
+                                                                '<div style="background-image: url('+ notif.image +'); background-size: cover; background-position: center; width: 50px; height: 50px; border-radius: 50%;"></div>' +
+                                                            '</div>' +
+                                                            '<div class="peer peer-greed">' +
+                                                                '<span>' +
+                                                                    notif.message +
+                                                                '</span>' +
+                                                                '<p class="m-0"><small class="fsz-xs">'+ notif.elapsed +'</small></p>' +
+                                                            '</div>' +
+                                                        '</a>' +
+                                                    '</li>';
+                                        notifContainer.append(notif);
+                                    });
+                                } else{
+                                    var noNotif = '<li class="py-3 text-center">' +
+                                                        '<span><i>No notification</i></span>' +
+                                                    '</li>';
+                                    notifContainer.html(noNotif);
+                                }
+                            }
+                            
+                        },
+                        error: function(){
+                            alert('Sorry! Something went wrong.');
+                        }
+                    }); 
+                }
+            });
+
+        });
+
+    });
+</script>

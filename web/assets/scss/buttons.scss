@@ -1,0 +1,78 @@
+.btn-text{
+    color: #494A4B;
+    padding: 8px 20px;
+    cursor: pointer;
+}
+.btn {
+    display: inline-block;
+    border: 0px;
+    font-family: "Rubik", sans-serif;
+    padding: 10px !important;
+    line-height: 1.55 !important;
+    border-radius: 5px !important;
+    background-color: transparent;
+    font-size: font(size, base) !important;
+    color: color(font, light);
+    font-weight: font(weight, base);
+    &.btn-primary {
+        background-color: color(primary);
+        &:hover {
+            background-color: color(primary, hover);
+        }
+    }
+    &.btn-secondary {
+        background-color: color(secondary, light);
+        border: 2px solid color(secondary);
+        color: color(secondary);
+        line-height: 1.3 !important;
+        &:hover {
+            background-color: color(secondary, hover);
+        }
+    }
+    &.btn-primary2 {
+        background-color: color(primary2);
+        &:hover {
+            background-color: color(primary2, hover);
+        }
+    }
+    &.btn-secondary2 {
+        background-color: color(secondary2, light);
+        border: 2px solid color(secondary2);
+        color: color(secondary2);
+        &:hover {
+            background-color: color(secondary2, hover);
+        }
+    }
+    &.btn-danger {
+        background-color: color(danger);;
+    }
+    &.btn-success {
+        background-color: color(success);
+    }
+    &.btn-clear {
+        color: color(font, secondary);
+        &:hover {
+            color: color(font, base);
+        }
+    }
+    &.btn-drop-down {
+        /* background-color: color(container, bg); */
+        border: 1px solid color(container, border);
+        color: color(font, base);
+        &:hover {
+            color: color(font, base);
+        }
+    }
+    &.circle {
+        border-radius: 50%;
+        width: 34px;
+        padding: 8px;
+        height: 34px;
+    }
+    &.btn-sm {
+        font-size: font(size, sub) !important;
+    }
+}
+.mat-flat-button {
+    min-width: initial !important;
+}

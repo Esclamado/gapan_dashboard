@@ -1,0 +1,107 @@
+<?php $_users = $this->getUsers(); ?>
+
+<div class="row">
+    <div class="col-md-12">
+		<div class="clearfix mB-20">
+			<h4 class="c-grey-900 mB-0 pull-left">Users</h4>	
+			<a href="<?= $this->getAdminUrl('/users/create'); ?>">
+				<button type="button" class="btn cur-p btn-success pull-right">
+					Add New User
+				</button>
+			</a>
+		</div>
+        <div class="card bd bdrs-3 pX-30 pY-25 mB-20 mB-20">
+			<div class="mB-20">
+				<h6 class="c-grey-900 mB-0">User List</h6>
+			</div>
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Fullname</th>
+							<th>E-mail</th>
+							<th>User Status</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php if(count($_users['datas']) > 0){ ?>
+							<?php foreach($_users['datas'] as $_user){ 
+								$_userProfile = $_user->getUserProfile();
+								// echo '<pre>';
+								// var_dump($_userProfile->getData());
+								$_userFullname = $_userProfile ? trim($_userProfile->getData('first_name')) . ' ' . trim($_userProfile->getData('last_name')) : '';	
+							?>
+							
+								
+								<tr>
+									<td><?= $_user->getData('id') ?></td>
+									<td><?= $_userFullname ?></td>
+									<td><?= $_user->getData('email') ?></td>
+									<td>
+										<?php if($_user->getData('status') == 1){ ?>
+											<span class="badge badge-success">Active</span>
+										<?php } else{ ?>
+											<span class="badge badge-danger">Inactive</span>
+										<?php } ?>
+									</td>
+									<td>
+									
+									
+									
+										<div class="btn-group table-action" role="group" aria-label="Second group">
+											<a class="btn btn-outline-secondary" href="<?= $this->getAdminUrl('/users/view' . '/?userId=' . $_user->getData('id')); ?>"><i class="fa fa-eye"></i></a>
+											<a class="btn btn-outline-secondary" href="<?= $this->getAdminUrl('/users/edit' . '/?userId=' . $_user->getData('id')); ?>"><i class="fa fa-edit"></i></a>
+											<a class="btn btn-outline-secondary" href="#" onclick="setUserToDelete(<?= $_user->getData('id') ?>, '<?= $_userFullname ?>')" data-toggle="modal" data-target="#deleteUserModal"><i class="fa fa-trash"></i></a>
+										</div>
+									</td>
+								</tr>
+							<?php } ?>
+						<?php } else{ ?>
+							<tr>
+								<td colspan="7"><p class="text-center m-0">No Users Yet.</p></td>
+							</tr>
+						<?php } ?>
+					</tbody>
+				</table>
+			</div>
+			<?php if($_users['total_page'] > 1){ ?>
+				<div class="row mb-20 p-20">
+					<div class="text-center">
+						<nav aria-label="User accounts navigation">
+							<ul class="pagination">
+								<li class="page-item <?= !$_users['previous_page'] ? 'disabled' : '' ?>">
+									<a href="<?= $_users['previous_page'] ? $this->getAdminUrl('/users/?page=' . $_users['previous_page']) : 'javascript:void(0)' ?>" class="page-link">
+										Previous
+									</a>
+								</li>
+
+								<?php foreach($_users['pages'] as $key => $page){ ?>
+									<?php if(isset($page)){ ?>
+										<li class="page-item <?= $page == $_users['current_page'] ? 'active' : '' ?>">
+											<a href="<?= $this->getAdminUrl('/users/?page=' . $page) ?>" class="page-link">
+												<?= $page ?>
+											</a>
+										</li>
+									<?php } ?>
+								<?php } ?>
+
+								<li class="page-item <?= !$_users['next_page'] ? 'disabled' : '' ?>">
+									<a href="<?= $_users['next_page'] ? $this->getAdminUrl('/users/?page=' . $_users['next_page']) : 'javascript:void(0)' ?>" class="page-link">
+										Next
+									</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			<?php } ?>
+        </div>
+    </div>
+</div>
+<pre>
+	<?php 
+		//print_r($_users['datas'][0]->getUserProfile()->returnSample()); 
+	?>
+</pre>

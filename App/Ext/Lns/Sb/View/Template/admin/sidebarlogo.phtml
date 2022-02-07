@@ -1,0 +1,42 @@
+<div class="sidebar-logo">
+    <div class="peers ai-c fxw-nw">
+        <div class="peer peer-greed">
+            <a class="sidebar-link td-n" href="<?= $this->getAdminUrl(); ?>">
+                <div class="peers ai-c fxw-nw">
+                    <div class="peer">
+                        <div class="logo">
+                            <?php
+                                $path = '/admin/images';
+                                $site_logo = $this->_controller->_siteConfig->getData('site_logo', 'logo.png');
+                                if($site_logo != 'logo.png'){
+                                    $path = '/images/uploads';
+                                }
+                            ?>
+                            <span class="helper"></span>
+                            <img alt="" src="<?= $this->getImageUrl([
+                                'vendor'=>'Lns',
+                                'module'=>'Sb',
+                                'path' => $path,
+                                'filename' => $site_logo,
+                                'resize' => [
+                                    'type' => 'toheight',
+                                    'height' => 65,
+                                    'allow_enlarge' => 0
+                                ]
+                            ]) ?>">
+                        </div>
+                    </div>
+                    <div class="peer">
+                        <?php
+                            $site_name = $this->_controller->_siteConfig->getData('site_name', 'LNS Base');
+                        ?>
+                        <h5 class="lh-1 mB-0 logo-text"><?= $site_name ?></h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="peer">
+            <div class="mobile-toggle sidebar-toggle"><a href="" class="td-n"><i class="ti-arrow-circle-left"></i></a></div>
+        </div>
+    </div>
+</div>

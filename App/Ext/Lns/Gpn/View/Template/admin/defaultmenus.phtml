@@ -1,0 +1,118 @@
+<?php 
+	use Of\Session\Session;
+	use Lns\Sb\Lib\Lang\Lang;
+	$session = new Session();
+	$_lang = new Lang();
+
+	$pageName = $this->_controller->getPageName();
+?>
+
+<?php
+    /* Egg Type */
+	$canViewEggtype = $this->_controller->checkPermission('MANAGEEGGTYPE', \Lns\Sb\Lib\Permission::VIEW);
+	$canAddEggtype = $this->_controller->checkPermission('MANAGEEGGTYPE', \Lns\Sb\Lib\Permission::CREATE);
+?>
+<?php if ($canViewEggtype || $canAddEggtype) : ?>
+	<?php
+		$open = '';
+		if(
+			$pageName == 'admin_eggtype_index_index' || 
+			$pageName == 'admin_eggtype_action_add'  || 
+			$pageName == 'admin_eggtype_action_edit'
+		){
+			$open = 'open';
+		}
+	?>
+	<li class="nav-item dropdown my-2 <?= $open ?>">
+		<a class="sidebar-link" href="javascript:void(0)">
+			<span class="icon-holder"><i class="text-success ti-layout"></i> </span>
+			<span class="title">Egg Type</span>
+			<span class="arrow"><i class="ti-angle-right"></i></span>
+		</a>
+		<ul class="dropdown-menu">
+			<?php if($canViewEggtype): ?>
+				<li>
+					<a class="sidebar-link" href="<?= $this->getAdminUrl('/eggtype') ?>">Manage Egg Type</a>
+				</li>
+			<?php endif; ?>
+			<?php if($canAddEggtype): ?>
+				<li>
+					<a class="sidebar-link" href="<?= $this->getAdminUrl('/eggtype/action/add') ?>">Add Egg Type</a>
+				</li>
+			<?php endif; ?>
+		</ul>
+	</li>
+<?php endif; ?>
+
+<?php
+$canViewHouse = $this->_controller->checkPermission('MANAGEHOUSE', \Lns\Sb\Lib\Permission::VIEW);
+$canAddHouse = $this->_controller->checkPermission('MANAGEHOUSE', \Lns\Sb\Lib\Permission::CREATE);
+?>
+<?php if ($canViewHouse || $canAddHouse) : ?>
+	<?php
+		$open = '';
+		if(
+			$pageName == 'admin_house_index_index' || 
+			$pageName == 'admin_house_action_add'  || 
+			$pageName == 'admin_house_action_edit'
+		){
+			$open = 'open';
+		}
+	?>
+	<li class="nav-item dropdown my-2 <?= $open ?>">
+		<a class="sidebar-link" href="javascript:void(0)">
+			<span class="icon-holder"><i class="text-success ti-layout"></i> </span>
+			<span class="title">House/Building</span>
+			<span class="arrow"><i class="ti-angle-right"></i></span>
+		</a>
+		<ul class="dropdown-menu">
+			<?php if($canViewHouse): ?>
+				<li>
+					<a class="sidebar-link" href="<?= $this->getAdminUrl('/house') ?>">Manage House/Building</a>
+				</li>
+			<?php endif; ?>
+			<?php if($canAddHouse): ?>
+				<li>
+					<a class="sidebar-link" href="<?= $this->getAdminUrl('/house/action/add') ?>">Add House/Building</a>
+				</li>
+			<?php endif; ?>
+		</ul>
+	</li>
+<?php endif; ?>
+
+<?php
+	/* Feed and Medicine */
+	$canViewFeedsandmedicine = $this->_controller->checkPermission('MANAGEFEEDSANDMEDICINE', \Lns\Sb\Lib\Permission::VIEW);
+	$canAddFeedsandmedicine = $this->_controller->checkPermission('MANAGEFEEDSANDMEDICINE', \Lns\Sb\Lib\Permission::CREATE);
+?>
+<?php if ($canViewFeedsandmedicine || $canAddFeedsandmedicine) : ?>
+	<?php
+		$open = '';
+		if(
+			$pageName == 'admin_feedsandmedicine_index_index' || 
+			$pageName == 'admin_feedsandmedicine_action_add'  || 
+			$pageName == 'admin_feedsandmedicine_action_edit'
+			){
+				$open = 'open';
+			}
+	?>
+	<li class="nav-item dropdown my-2 <?= $open ?>">
+		<a class="sidebar-link" href="javascript:void(0)">
+			<span class="icon-holder"><i class="text-success ti-layout"></i> </span>
+			<span class="title">Feeds and Medicine</span>
+			<span class="arrow"><i class="ti-angle-right"></i></span>
+		</a>
+		<ul class="dropdown-menu">
+			<?php if($canViewFeedsandmedicine): ?>
+				<li>
+					<a class="sidebar-link" href="<?= $this->getAdminUrl('/feedsandmedicine') ?>">Manage Feeds and Medicine Consumption</a>
+				</li>
+			<?php endif; ?>
+			<?php if($canAddFeedsandmedicine): ?>
+				<li>
+					<a class="sidebar-link" href="<?= $this->getAdminUrl('/feedsandmedicine/action/add') ?>">Add New Monthly Record</a>
+				</li>
+			<?php endif; ?>
+		</ul>
+	</li>
+<?php endif; ?>

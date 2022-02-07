@@ -1,0 +1,102 @@
+$fonts: (
+    size: (
+        base: 16px,
+        sub: 14px,
+        heading: 24px,
+        stats: 32px,
+        card-title: 13px,
+        mini-heading: 20px
+    ),
+    weight: (
+        base: normal,
+        bold: bold,
+        medium: 500
+    ),
+    style: (
+        italic: italic
+    ),
+    transform: (
+        base: none,
+        uppercase: uppercase,
+        lowercase: lowercase,
+        capitalize: capitalize
+    )
+);
+@function font($font, $type: 'base') {
+    @return map-get(map-get($fonts, $font), $type);
+}
+p {
+    font-size: font(size, base);
+    font-weight: font(weight, normal);
+    color: color(font, secondary);
+    text-transform: font(transform, base);
+}
+.heading {
+    font-size: font(size, heading);
+    font-weight: font(weight, bold);
+    color: color(font, base);
+    text-transform: font(transform, base);
+}
+.sub-heading {
+    color: color(font, secondary);
+    &.italic {
+        font-style: font(style, italic);
+    }
+    strong {
+        color: color(font, base);
+    }
+}
+.mini-heading {
+    font-size: font(size, mini-heading);
+    font-weight: font(weight, medium);
+    color: color(font, base);
+    text-transform: font(transform, base);
+}
+.card-heading {
+    font-size: font(size, card-title);
+    font-weight: font(weight, base);
+    text-transform: font(transform, uppercase);
+    color: color(font, secondary);
+}
+.sidebar {
+    color: color(font, base);
+    ul {
+        li {
+            font-size: font(size, base);
+            a.main-nav {
+                color: color(font, secondary);
+                &.sub {
+                    font-size: font(size, sub);
+                }
+                &:hover {
+                    font-weight: font(weight, medium);
+                    color: color(font, base);
+                }
+            }
+            &.active {
+                a {
+                    font-weight: font(weight, medium);
+                    color: color(font, base);
+                }
+            }
+        }
+    }
+}
+mat-checkbox {
+    label {
+        font-size: font(size, base) !important;
+    }
+}
+.vertical-text {
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+}
+.vertical-text-full {
+    width: max-content;
+    position: absolute;
+    left: -25%;
+    top: 50%;
+}

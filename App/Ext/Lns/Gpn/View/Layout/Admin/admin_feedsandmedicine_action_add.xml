@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<html xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:id="html" attr="lang='en-US'" weight="1">
+	<body xml:id="body" weight="1">
+		<container xml:id="mainContent" htmlId="mainContent" weight="1">
+            <template 
+                class="Lns\Gpn\Lib\Html\FeedsandMedicine"
+                xml:id="feedsandmedicine_action_add"
+                vendor="Lns" 
+                module="Gpn" 
+                template="admin/content/form/feedsandmedicine.phtml">
+                <template
+                    class="Lns\Gpn\Lib\Html\FeedsandMedicine"                
+                    xml:id="feedsandmedicine_action_add_prescribemedicine"
+                    vendor="Lns" 
+                    module="Gpn" 
+                    template="admin/content/form/feedsandmedicine/prescribemedicine.phtml">
+                </template>
+            </template>
+		</container>
+	</body>
+</html>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<html xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:id="html" attr="lang='en-US'" weight="1">
+    <head xml:id="head" weight="1">
+        <css src="admin/css/trumbowyg/trumbowyg" media="all" />
+    </head>
+	<body xml:id="body" weight="1">
+		<container xml:id="mainContent" htmlId="mainContent" weight="1">
+            <template 
+                class="\Lns\Sb\Lib\Html\Cms" 
+                xml:id="cms_action_add" 
+                vendor="Lns" 
+                module="Sb" 
+                template="admin/content/form/cms.phtml" 
+            />
+		</container>
+	</body>
+</html>

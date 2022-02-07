@@ -1,0 +1,106 @@
+<div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="card bd bdrs-3 pX-30 pY-25 mB-20 mB-20">
+                        Prescribed Medicine per Day
+                    <div class="row">
+                        <div class="col-lg-1">
+                            Day
+                        </div>
+                        <div class="col-lg-11">
+                            Medicine Name
+                        </div>
+                    </div>
+                    <div class="row">
+                        <?php foreach ($dailyhouseharvests as $dailyhouseharvest) : 
+                            $id = $dailyhouseharvest->getData('medicine_ids');
+
+                            $medIds = explode(",", $id);
+
+                            $med = [];
+                            $meds = '';
+                            foreach ($medIds as $medId) {
+                            $medName = $this->_medicine->getMedicine($medId);
+                            $med[] = $medName['medicine'];
+                            }
+                            $meds = implode(', ', $med);
+
+                        ?>
+                            <div class="col-lg-1">
+                                <?= $date = date("j", strtotime($dailyhouseharvest->getData('created_at'))); ?>
+                            </div>
+                            <div class="col-lg-7 mB-20">
+                                <input 
+                                    value="<?= $meds ?>"
+                                    name=""
+                                    type="text" 
+                                    class="form-control" 
+                                    id="input-medicine" 
+                                    placeholder="" 
+                                    required
+                                />
+                            </div>
+                            <div class="col-lg-2">
+                                Edit
+                            </div>
+                            <div class="col-lg-2">
+                                Clear
+                            </div>
+                        <?php endforeach ?>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1">
+                            <?= $date = date("j", strtotime($dailyhouseharvest->getData('created_at')))+1; ?>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="row">
+                                <?php foreach ($medicines as $medicine) : ?>
+                                    <div class="checkbox checkbox-info peers ai-c mB-15 col-lg-3">
+                                        <input 
+                                            type="checkbox" 
+                                            id=""
+                                            name="medicine" 
+                                            class="" 
+                                            value="" 
+                                        /> 
+                                        <label for="" class="">
+                                            <span class="peer peer-greed">
+                                                <?= $medicine->getData('medicine'); ?>
+                                            </span>
+                                        </label>
+                                    </div>
+                                <?php endforeach ?>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            Save
+                        </div>
+                        <div class="col-lg-2">
+                            Clear
+                        </div>
+                    </div>
+                    <div class="row">
+                        <a href="<?= $this->getAdminUrl('') ?>">
+                            <button type="button" class="btn cur-p btn-success pull-left">
+                                Add Daily Medication
+                            </button>
+                        </a>
+                    </div>
+                        <div class="bottom-line2"></div>
+                    <div class="col-lg-12">
+                        <div class="col-lg-2 pull-right">
+                            <a href="<?= $this->getAdminUrl('/feedsandmedicine') ?>">
+                                <button type="submit" class="btn cur-p btn-success">
+                                    Add Record
+                                </button>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-1 pull-right">
+                            <a href="<?= $this->getAdminUrl('/feedsandmedicine/action/add') ?>">
+                                <button type="button" class="btn cur-p">
+                                    Cancel 
+                                </button>
+                            </a>
+                        </div>
+                    </div>    
+                </div>
+            </div>

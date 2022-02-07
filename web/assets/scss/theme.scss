@@ -1,0 +1,169 @@
+.main-container {
+    transition: all 0.2s ease-in-out;
+    background-color: color(container, bg);
+    .container-card {
+        background-color: color(container);
+        border-radius: 5px;
+        border: 1px solid color(container, border);
+        /* padding: 35px 25px; */
+        .stats {
+            border-right: 1px solid color(container, border);
+            p {
+                font-size: font(size, sub);
+                color: color(font, base);
+            }
+            h1 {
+                font-size: font(size, stats);
+                color: color(font, base);
+            }
+            &:last-child {
+                border-right: none;
+            }
+        }
+        &.view-record {
+            h6 {
+                font-size: font(size, base);
+                color: color(font, base);
+                font-weight: font(weight, medium);
+            }
+            table {
+                tr {
+                    td {
+                        font-size: font(size, base);
+                        color: color(font, base);
+                        font-weight: font(weight, medium);
+                        &.alt {
+                            color: color(font, primary);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.img-responsive {
+    width: 100%;
+    height: auto;
+}
+.avatar {
+    border-radius: 50%;
+}
+.divider {
+    border-right: 1px solid color(font, secondary);
+    opacity: 0.5;
+}
+.mat-calendar-body-begin-range {
+    background-color: color(primary, sky);
+    border-top-left-radius: 999px;
+    border-bottom-left-radius: 999px;
+    .mat-calendar-body-selected {
+        background-color: color(primary, base);
+        color: color(font, light);
+    }
+}
+.mat-calendar-body-end-range {
+    background-color: color(primary, sky);
+    border-top-right-radius: 999px;
+    border-bottom-right-radius: 999px;
+    .mat-calendar-body-selected {
+        background-color: color(primary, base);
+        color: color(font, light);
+    }
+}
+.mat-calendar-cell-semi-selected {
+    background-color: color(primary, sky);
+}
+.mat-tab-header, .mat-tab-nav-bar {
+    border: none;
+}
+.mat-chip {
+    &.mat-primary {
+        background-color: color(primary, base);
+        color: color(font, light);
+    }
+    &.mat-secondary {
+        background-color: color(secondary2, base);
+        color: color(font, light);
+    }
+    &.mat-danger {
+        background-color: color(danger, base);
+        color: color(font, light);
+    }
+    &.mat-warning {
+        background-color: color(warning, base);
+        color: color(font, light);
+    }
+    &.mat-success {
+        background-color: color(success, base);
+        color: color(font, light);
+    }
+}
+.no-box-shadow {
+    box-shadow: none !important;
+}
+.mat-expansion-panel-body {
+    padding: 0 0 16px !important;
+}
+.sidenav-container {
+    height: 100%;
+}
+.sidenav {
+    width: 300px;
+}
+.sidenav .mat-toolbar {
+    background: inherit;
+}
+.mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+.mat-list-item {
+    /* span {
+        color: color(font, secondary);
+    } */
+    /* i {
+        &::before {
+            opacity: .5;
+        }
+    } */
+}
+.mat-list-item {
+    &:hover {
+        background-color: #FF9F1A !important;
+        /* span {
+            color: color(font, base);
+        }
+        &::before {
+            opacity: 1 !important;
+        } */
+    }
+}
+.active-list-item {
+    background-color: #FF9F1A !important;
+    /* span {
+        color: color(font, base);
+    }
+    &::before {
+        opacity: 1 !important;
+    } */
+}
+.mat-light {
+    background-color: color(container, base);
+}
+.p-initial {
+    position: initial !important;
+}
+.mat-menu-panel {
+    &.notif-container {
+        height: 250px;
+    }
+}
+.mat-card-header {
+    &.notif-card-header {
+        .mat-card-header-text {
+            margin-right: 0;
+        }
+    }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<html xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:id="html" attr="lang='en-US'" weight="1">
+	<body xml:id="body" weight="1">
+		<container xml:id="mainContent" htmlId="mainContent" weight="2">
+			<template 
+				class="\Lns\Sb\Lib\Html\RoleAssign"
+				xml:id="roles_permission_assign" 
+				vendor="Lns" 
+				module="Sb" 
+				template="admin/content/roles_permission_assign.phtml"
+			/>
+		</container>
+	</body>
+</html>

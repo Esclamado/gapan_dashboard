@@ -1,0 +1,56 @@
+.data-table {
+    table {
+        width: 100%;
+        border: 1px solid color(container, border);
+        background-color: color(container, base);
+        thead,
+        tfoot {
+            background-color: color(table, heading);
+            th {
+                &.sort{
+                    cursor: pointer;
+                }
+                border-bottom: 1px solid color(container, border);
+                border-right: 1px solid color(container, border);
+                padding: 12px 15px;
+                font-size: font(size, base);
+                color: #444444;
+                font-weight: font(weight, medium);
+                i {
+                    float: right;
+                }
+            }
+            th:last-child {
+                border-right: 0px;
+            }
+        }
+        tbody {
+            tr {
+                border-bottom: 1px solid color(container, border);
+                td {
+                    padding: 18px 15px;
+                    border-right: 1px solid color(container, border);
+                    &.alt {
+                        background-color: color(table, heading);
+                    }
+                }
+                td:last-child {
+                    border-right: 0px;
+                }
+            }
+            tr:last-child {
+                border-right: 0px;
+            }
+        }
+    }
+}
+.paginate {
+    .next-page {
+        &:hover {
+            background-color: color(primary, base);
+            border-radius: 50%;
+            padding: 10px 15px 10px 15px;
+            color: color(font, light);
+        }
+    }
+}

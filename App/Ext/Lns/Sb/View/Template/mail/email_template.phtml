@@ -1,0 +1,41 @@
+<?php
+
+	use Lns\Sb\Lib\Constants;
+	// $_contactInfoEntity = $this->_di->get('Lns\Sb\Lib\Entity\Db\ContactInfo');
+?>
+
+<div style="width:100%;padding:15px;box-sizing:border-box;min-width:320px;background:#f2f2f2">
+
+	<div style="max-width:426px!important;margin-top:45px;margin-left:auto;margin-right:auto;min-height:150px;background:#ffffff;border-radius:5px!important ">
+
+		<div style="padding: 40px 30px;font-family: arial;font-size: 14px;line-height: 1.3em;">
+
+			<?= $messageBody ?>
+
+		</div>
+
+		<div style="background:#ffffff;height:106px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;padding:30px 15px 0px 15px;box-sizing:border-box;border-top:1px solid #f2f2f2">
+
+		</div>
+
+	</div>
+
+	<div style="max-width:426px;margin:0px auto 0 auto!important;min-height:150px;padding:15px;box-sizing:border-box;text-align:center">
+
+		<div style="border-top: solid 1px #e8ebef;box-sizing: border-box;padding: 22px 0;">
+
+			<p style="margin: 0;font-size: 11px;font-family: arial;color: #666666;">
+
+				You’re receiving this message because you signed up to <?= Constants::SITE_NAME ?>.</p>
+
+			<p style="font-size: 11px;color: #666666;font-style: italic;">
+
+				Copyright © <?= Constants::SITE_NAME ?>, All Rights Reserved
+
+			</p>
+
+		</div>
+
+	</div>
+
+</div>

@@ -1,0 +1,62 @@
+<?php
+use Lns\Sb\Lib\Lang\Lang;
+$eggtype = $this->getEggtype();
+$_lang = new Lang();
+?>
+<div class="row">
+  <div class="col-md-12">
+    <div class="clearfix mB-20">
+			<h4 class="c-grey-900 mB-0 pull-left"><?= $eggtype ? 'Update Egg Type' : 'Create New Egg Type' ?></h4>	
+			<a href="<?= $this->getAdminUrl('/eggtype') ?>">
+				<button type="button" class="btn cur-p btn-success pull-right">
+					<?= $_lang->getLang('back'); ?>
+				</button>
+			</a>
+		</div>
+  </div>
+	<div class="col-sm-12 col-md-12 col-lg-12">
+		<div class="card bd bdrs-3 pX-30 pY-25 mB-20 mB-20">
+			<h6 class="c-grey-900 mB-20">Egg Type Fields</h6>
+			<form action="<?= $this->getAdminUrl('eggtype/action/save') ?>" method="POST">
+				<input type="hidden" name="id" value="<?= $eggtype ? $eggtype->getData('id') : '' ?>" />
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-label" for="egg-type">
+                    Egg Type
+					</label>
+					<div class="col-md-10">
+						<input 
+							type="text" 
+							class="form-control" 
+							id="egg-type" 
+							name="type" 
+							value="<?= $eggtype ? $eggtype->getData('type') : '' ?>" 
+							required="required"
+						/>
+					</div>
+				</div>
+                <div class="form-group row">
+					<label class="col-sm-2 col-form-label" for="egg-type-shortcode">
+                    Type Shortcode
+					</label>
+					<div class="col-md-10">
+						<input 
+							type="text" 
+							class="form-control" 
+							id="egg-type-shortcode" 
+							name="type_shortcode" 
+							value="<?= $eggtype ? $eggtype->getData('type_shortcode') : '' ?>" 
+							required="required"
+						/>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-10">
+						<button type="submit" class="btn btn-primary" value="1" name="save">
+							<?= $_lang->getLang('save'); ?>
+						</button>
+					</div>
+				</div>
+			</form>
+    	</div>
+	</div>
+</div>

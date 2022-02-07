@@ -1,0 +1,12 @@
+<?php $m = $this->_controller->_message->toHtml(); ?>
+
+<?php if(!empty($m)): ?>
+	<?= $m ?>
+	<script type="text/javascript">
+		require(['jquery'], function($){
+			$('.notificationMessageClose').on('click', function(){
+				this.parentElement.remove();
+			});
+		});
+	</script>
+<?php endif; ?>

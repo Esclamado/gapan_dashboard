@@ -1,0 +1,62 @@
+.house-number{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 24px;
+	display: flex;
+	align-items: flex-end;
+	color: #1E2631;
+}
+.daily-report{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 12px;
+	line-height: 16px;
+	display: flex;
+	align-items: flex-end;
+	color: #72787F;
+}
+.last-updated{
+	font-family: Roboto;
+	font-style: italic;
+	font-weight: normal;
+	font-size: 12px;
+	line-height: 16px;
+	display: flex;
+	align-items: flex-end;
+	color: #C1C2C3;
+}
+.view-details{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 16px;
+	display: flex;
+	align-items: flex-end;
+	color: #1E2631;
+}
+.bottom-line{
+	border-bottom: 1px solid #EAEDF0;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+.bottom-line2{
+    border-bottom: 1px solid #DDE1E5;
+    margin: auto;
+    width: 90%;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+.card-design{
+	margin-top: 15px;
+	margin-bottom: 15px;
+	border-radius: 10px;
+	box-shadow: 9px 10px 20px rgba(54, 60, 69, 0.1);
+	border: transparent;
+}
+.monthly-record{
+	margin: auto;
+}

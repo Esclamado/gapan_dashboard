@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<html xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:id="html" attr="lang='en-US'" weight="1">
+	<head xml:id="head" weight="1">
+		<template xml:id="admin_default_head" vendor="Lns" module="Sb" template="admin/head.phtml" />
+		<css src="admin/css/bootstrap/bootstrap.min" media="all" />
+		<css src="admin/css/custom" media="all" />
+		<css src="admin/css/default" media="all" />
+		<css src="admin/css/chosen" media="all" />
+		<css src="admin/js/lib/daterangepicker/daterangepicker" media="all" />
+		<css src="admin/js/lib/datetimepicker/bootstrap-datetimepicker" media="all" />
+    </head>
+	<body xml:id="body" weight="1">
+		<container xml:id="loader" htmlId="loader" weight="1">
+			<container xml:id="spinner" htmlClass="spinner" weight="1"></container>
+		</container>
+		<container xml:id="main_container" htmlId="main_container" weight="1">
+			<container xml:id="sidebar" htmlClass="sidebar" weight="1">
+				<container xml:id="sidebarinner" htmlClass="sidebar-inner" weight="1">
+					<template xml:id="sidebarlogo" vendor="Lns" module="Sb" template="admin/sidebarlogo.phtml" cacheable="1" max-age="604800"/>
+					<container xml:id="sidebarmenu" htlmTag="ul" htmlClass="sidebar-menu scrollable pos-r" weight="1">
+						<template xml:id="sidebarmenudefaults" vendor="Lns" module="Sb" template="admin/defaultmenus.phtml"/>
+					</container>
+				</container>
+			</container>
+			<container xml:id="pagecontainer" htmlClass="page-container" weight="1">
+				<container xml:id="headernavbar" htmlClass="header navbar" weight="1">
+					<container xml:id="headercontainer" htmlClass="header-container" weight="1">
+						<template xml:id="navleft" vendor="Lns" module="Sb" template="admin/header/navleft.phtml"/>
+						<template xml:id="navright" vendor="Lns" module="Sb" template="admin/header/navright.phtml"/>
+					</container>
+				</container>
+				<container xml:id="main_content" htmlTag="main" htmlClass="main-content bgc-grey-100" weight="1">
+					<container xml:id="mainContent" htmlId="mainContent" weight="1">
+					</container>
+				</container>
+				<template xml:id="footer" vendor="Lns" module="Sb" template="admin/footer.phtml"/>
+			</container>
+		</container>
+		<template xml:id="messages" vendor="Lns" module="Sb" template="admin/messages.phtml"/>
+		<template xml:id="confirmation_box" vendor="Lns" module="Sb" template="admin/confirmation.phtml"/>
+		<js src="admin/js/vendor" vendor="Lns" module="Sb" />
+		<js src="admin/js/bundle" vendor="Lns" module="Sb" />
+		<js src="admin/js/form-validation" vendor="Lns" module="Sb" />
+    </body>
+</html>

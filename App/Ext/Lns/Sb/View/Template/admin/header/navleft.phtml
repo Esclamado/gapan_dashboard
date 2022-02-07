@@ -1,0 +1,24 @@
+<ul class="nav-left">
+    <li>
+    	<a id="sidebar-toggle" class="sidebar-toggle" href="javascript:void(0);">
+    		<i class="ti-menu"></i>
+    	</a>
+    </li>
+</ul>
+<script type="text/javascript">
+	require(['jquery'], function($){
+		/*app is-collapsed*/
+		var iscollapsed = false;
+		$('#sidebar-toggle').on('click', function(){
+			if(!iscollapsed){
+				$('body').prop('class', 'app is-collapsed');
+				iscollapsed = true;
+			} 
+			else {
+				$('body').prop('class', 'app');
+				iscollapsed = false;
+			}
+			console.log(iscollapsed);
+		});
+	});
+</script>

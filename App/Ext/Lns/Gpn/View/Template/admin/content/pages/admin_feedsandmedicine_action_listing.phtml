@@ -1,0 +1,85 @@
+<?php
+use Lns\Sb\Lib\Lang\Lang;
+$_lang = new Lang();
+?>
+
+<div class="row">
+    <div class="col-lg-6">
+		<div class="clearfix mB-20">
+			<h4 class="c-grey-900 mB-0 pull-left">
+			View House/Building Details
+			</h4>
+		</div>
+	</div>
+    <div class="col-lg-6">
+        <div class="clearfix mB-20">
+            <a href="<?= $this->getAdminUrl('/feedsandmedicine') ?>">
+                <button type="button" class="btn cur-p btn-success pull-right">
+                    Go back to list
+                </button>
+            </a>
+		</div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card bd bdrs-3 pX-30 pY-25 mB-20 mB-20">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <td colspan="2">House/Building</td>
+                        <td>@here</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Daily Report Progress</td>
+                        <td>@here</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Month</td>
+                        <td>@here</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Year</td>
+                        <td>@here</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Beginning Population of Chickens</td>
+                        <td>@here</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Age of Chickens</td>
+                        <td>@here</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card bd bdrs-3 pX-30 pY-25 mB-20 mB-20">
+            Actions
+            <br>
+            Here are the actions you can apply for this order details.
+
+            <a href="<?= $this->getAdminUrl('/feedsandmedicine') ?>">
+                <button type="button" class="btn cur-p btn-success">
+                    Edit Details
+                </button>
+            </a>
+        </div>
+        <div class="card bd bdrs-3 pX-30 pY-25 mB-20 mB-20">
+            Download Report
+            <br>
+            You can download report as:
+            <a href="<?= $this->getAdminUrl('/feedsandmedicine') ?>">
+                <button type="button" class="btn cur-p btn-success">
+                    Download as CSV
+                </button>
+            </a>
+            <a href="<?= $this->getAdminUrl('/feedsandmedicine') ?>">
+                <button type="button" class="btn cur-p btn-success">
+                    Download as PDF
+                </button>
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+<?php
+use Lns\Sb\Lib\Lang\Lang;
+$cms = $this->getCms();
+$_lang = new Lang();
+?>
+<div class="row">
+  <div class="col-md-12">
+    <div class="clearfix mB-20">
+			<h4 class="c-grey-900 mB-0 pull-left"><?= $cms ? $_lang->getLang('edit_cms') : $_lang->getLang('create_new_cms'); ?></h4>	
+			<a href="<?= $this->getAdminUrl('/cms') ?>">
+				<button type="button" class="btn cur-p btn-success pull-right">
+					<?= $_lang->getLang('back'); ?>
+				</button>
+			</a>
+		</div>
+  </div>
+	<div class="col-sm-12 col-md-12 col-lg-12">
+		<div class="card bd bdrs-3 pX-30 pY-25 mB-20 mB-20">
+			<h6 class="c-grey-900 mB-20">CMS Fields</h6>
+			<form action="<?= $this->getAdminUrl('cms/action/save') ?>" method="POST">
+				<input type="hidden" name="id" value="<?= $cms ? $cms->getData('id') : '' ?>" />
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-label" for="cms-page-title">
+						<?= $_lang->getLang('title'); ?>
+					</label>
+					<div class="col-md-10">
+						<input 
+							type="text" 
+							class="form-control" 
+							id="cms-page-title" 
+							name="title" 
+							value="<?= $cms ? $cms->getData('title') : '' ?>" 
+							required="required"
+						/>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-label" for="cms-page">
+						<?= $_lang->getLang('page_url'); ?>
+					</label>
+					<div class="col-md-10">
+						<input 
+							type="text" 
+							class="form-control" 
+							id="cms-page" 
+							name="page" 
+							value="<?= $cms ? $cms->getData('page') : '' ?>" 
+							required="required"
+						/>
+						<small class="form-text text-muted"><?= $_lang->getLang('the_new_url_path'); ?>. E.g. <?= $this->getUrl('/'); ?><strong>my-new-page</strong></small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-label" for="ckEditor"><?= $_lang->getLang('content'); ?></label> 
+					<div class="col-md-10">
+						<textarea
+							name="content"
+							class="form-control"
+							id="ckEditor"
+						><?= $cms ? $cms->getData('content') : '' ?></textarea>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-10">
+						<button type="submit" class="btn btn-primary" value="1" name="save">
+							<?= $_lang->getLang('save'); ?>
+						</button>
+					</div>
+				</div>
+			</form>
+    	</div>
+	</div>
+</div>
+<script type="text/javascript">
+	requirejs([
+		'jquery',
+		'trumbowyg'
+	], function($, t){
+		$('#ckEditor').trumbowyg({
+			autogrow: true
+		});
+		$("#cms-page").on('keyup', function() {
+			$(this).val($(this).val()
+			.toLowerCase().replace(/[\~\`\!\@\#\$\%\^\&\*\(\)\,\.\:\;\"\'\{\}\[\]\/\?\<\>\=]/g, '')
+			.split(' ').join('-')/* replace(/ /g, "-") */);
+		});
+	});
+</script>

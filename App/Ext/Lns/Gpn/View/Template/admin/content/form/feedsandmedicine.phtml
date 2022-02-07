@@ -1,0 +1,120 @@
+<?php
+use Lns\Sb\Lib\Lang\Lang;
+$dailyhouseharvests = $this->_dailyhouseharvest->getDailyhouseharvest();
+$bird_count = 0;
+$age_week = 1;
+$age_day = 0;
+if($this->_controller->getParam('house_id')){
+    $hasRecord = $this->_dailyhouseharvest->hasRecord($this->_controller->getParam('house_id'));
+    if($hasRecord){
+        $bird_count = $hasRecord->getData('bird_count');
+        $age_week = $hasRecord->getData('age_week');
+        $age_day = $hasRecord->getData('age_day');
+    }else{
+        $hasRecord = $this->_dailyhouseharvest->getLatestRecord($this->_controller->getParam('house_id'));
+        if($hasRecord){
+            $bird_count = $hasRecord->getData('bird_count');
+            $age_week = $hasRecord->getData('age_week');
+            $age_day = $hasRecord->getData('age_day');
+        }
+    }
+}
+$houses = $this->_house->getHouses();
+$_lang = new Lang();
+$formSubmit = $this->getAdminUrl('/feedsandmedicine/action/save');
+$method = 'POST';
+/* if($this->_controller->getParam('house_id')){
+    $formSubmit = $this->getAdminUrl('/feedsandmedicine/action/save');
+    $method = 'POST';
+} */
+?>
+
+<div class="row">
+    <div class="col-lg-10 monthly-record">
+        <div class="col-lg-12">	
+            <a href="<?= $this->getAdminUrl('/feedsandmedicine') ?>">
+                <button type="button" class="btn cur-p btn-success">
+                    Go back to list
+                </button>
+            </a>
+            <h5 class="record-title">Add new monthly record</h5>
+            <span class="record-subtitle">For this month of <?= date('F Y'); ?></span>
+        </div>
+        <form id="needs-validation" novalidate action="<?= $formSubmit; ?>" method="<?= $method ?>" enctype="multipart/form-data" >
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="card bd bdrs-3 pX-30 pY-25 mB-20 mB-20">
+                    Record Details
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label for="validationCustom02">House/Building no. *</label> 
+                                <select name="house_id" class="form-control" id="select-house" onchange="onChange()" required>
+                                    <option value="" disabled selected>Please select a house/bldg no.</option>
+
+                                        <?php foreach ($houses as $house) : 
+                                            $hasRecordForThisMonth = $this->_dailyhouseharvest->hasRecordForThisMonth($house->getData('id'));
+                                            if(!$hasRecordForThisMonth){ ?>
+                                                <option value="<?= $house->getData('id') ?>" <?= $this->_controller->getParam('house_id')==$house->getData('id') ? 'selected' : '' ; ?>><?= $house->getData('house_name') ?></option>
+                                            <?php } ?>
+                                         <?php endforeach ?>
+                                        
+                                </select>
+                        </div>
+                        <?php if($this->_controller->getParam('house_id')){ ?>
+                            <div class="col-md-6 form-group">
+                                <label for="input-population">Add Beginning Population of Chicken *</label> 
+                                <input 
+                                    value="<?= $bird_count ?>" 
+                                    name="bird_count" 
+                                    type="number" 
+                                    class="form-control" 
+                                    id="input-population" 
+                                    placeholder="" 
+                                    required
+                                />
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="input-weeks">Beginning Age of Chicken *</label> 
+                                <input 
+                                    value="<?= $age_week ?>"  
+                                    name="age_week" 
+                                    type="number" 
+                                    class="form-control" 
+                                    id="input-weeks" 
+                                    placeholder="Weeks"
+                                    required
+                                />
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label for="input-days" style="color: #fff;">.</label> 
+                                <input 
+                                    value="<?= $age_day ?>"  
+                                    name="age_day" 
+                                    type="number" 
+                                    class="form-control" 
+                                    id="input-days" 
+                                    placeholder="Days"
+                                    required
+                                />
+                            </div>
+                    </div>
+                </div>
+            </div>
+                    <?php echo $this->getChildHtml('feedsandmedicine_action_add_prescribemedicine'); ?>
+                        <?php } ?>
+        </form>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+
+/*     function logChange() {
+        var houseSelector = document.getElementById('select-house');
+        document.getElementById("input-population").value = houseSelector.value;
+    } */
+    function onChange() {
+        $('#needs-validation').attr('action', "<?= $this->getAdminUrl('/feedsandmedicine/action/add'); ?>");
+        $('#needs-validation').attr('method', "GET");
+        $('#needs-validation').submit();
+    }
+
+</script>

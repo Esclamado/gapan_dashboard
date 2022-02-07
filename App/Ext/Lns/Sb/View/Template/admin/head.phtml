@@ -1,0 +1,85 @@
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <title><?= $this->_controller->getTitle() ?></title>
+    <style>
+        #loader {transition: all .3s ease-in-out;opacity: 1;visibility: visible;position: fixed;height: 100vh;width: 100%;background: #fff;z-index: 90000}     
+        #loader.fadeOut {opacity: 0;visibility: hidden}    
+        .spinner {width: 40px;height: 40px;position: absolute;top: calc(50% - 20px);left: calc(50% - 20px);background-color: #333;border-radius: 100%;-webkit-animation: sk-scaleout 1s infinite ease-in-out;animation: sk-scaleout 1s infinite ease-in-out}
+        @-webkit-keyframes sk-scaleout {0% {-webkit-transform: scale(0)}100% {-webkit-transform: scale(1);opacity: 0}}
+        @keyframes sk-scaleout {0% {-webkit-transform: scale(0);transform: scale(0)}100% {-webkit-transform: scale(1);transform: scale(1);opacity: 0}}
+    </style>
+    
+    <script>
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.classList.add('fadeOut');
+            }, 300);
+        });
+    </script>
+    <script src="<?= $this->getPublicUrl().'/lns/sb/admin/js/lib/require.js' ?>" vendor="Lns" module="Sb"></script>
+    <script>
+        requirejs.config({
+            baseUrl: '<?= $this->getPublicUrl() ?>',
+            shim : {
+                bootstrap : {
+                    deps : [ 'jquery'],
+                    exports: 'Bootstrap'
+                },
+                chosen : {
+                    deps : [ 'jquery'],
+                    exports: 'Chosen'
+                },
+                pdfmake: {
+                    exports: 'vfs_fonts'
+                },
+                vfs_fonts: {
+                    deps: ['pdfmake'],
+                    exports: 'vfs_fonts'
+                },
+                locationpicker: {
+                    deps: ['jquery'],
+                    exports: 'locationpicker'
+                }
+            },
+            paths: {
+                jquery   : 'lns/sb/admin/js/lib/jquery-3.1.0',
+                jqueryui: 'lns/sb/admin/js/lib/jquery-ui-1.12.1',
+                moment : 'lns/sb/admin/js/lib/datetimepicker/moment.min',
+                bootstrap : 'lns/sb/admin/js/lib/bootstrap',
+                chartjs : 'lns/sb/admin/js/lib/chart/Chart.min',
+                'datatables.net' : 'lns/sb/admin/js/lib/datatable/datatables/js/jquery.dataTables',
+
+                'datatables.net-buttons' : 'lns/sb/admin/js/lib/datatable/buttons/js/dataTables.buttons',
+                dtbuttonsprint : 'lns/sb/admin/js/lib/datatable/buttons/js/buttons.print',
+                dtbuttonshtml5 : 'lns/sb/admin/js/lib/datatable/buttons/js/buttons.html5',
+                dtbuttonsflash : 'lns/sb/admin/js/lib/datatable/buttons/js/buttons.flash',
+
+                pdfmake: 'lns/sb/admin/js/lib/datatable/pdfmake/pdfmake',
+                vfs_fonts: 'lns/sb/admin/js/lib/datatable/pdfmake/vfs_fonts',
+
+
+                dtfixedcolumns : 'lns/sb/admin/js/lib/datatable/fixedcolumns/js/dataTables.fixedColumns',
+                ckeditor : 'lns/sb/admin/js/lib/ckeditor5/ckeditor',
+                trumbowyg : 'lns/sb/admin/js/lib/trumbowyg/dist/trumbowyg',
+                chosen : 'lns/sb/admin/js/lib/chosen.jquery',
+                datetimepicker : 'lns/sb/admin/js/lib/datetimepicker/bootstrap-datetimepicker',
+                daterangepicker : 'lns/sb/admin/js/lib/daterangepicker/daterangepicker',
+                locationpicker : 'lns/sb/admin/js/lib/locationpicker/locationpicker.jquery'  
+            }
+        });
+    </script>
+
+    <?php 
+        $favicon = $this->_controller->_siteConfig->getData('site_favicon');
+        if($favicon):
+    ?>
+        <link rel="icon" type="image/png" sizes="16x16" href="<?= $this->getImageUrl([
+            'vendor' => 'Lns',
+            'module' => 'Sb',
+            'path' => 'images/uploads',
+            'filename' => $favicon
+        ]); ?>">
+    <?php endif ?>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">

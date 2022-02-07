@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<html xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:id="html" attr="lang='en-US'" weight="1">
+	<body xml:id="body" weight="1">
+		<container xml:id="mainContent" htmlId="mainContent" weight="1">
+			<template xml:id="email_templates_index" vendor="Lns" class="Lns\Sb\Lib\Html\Emails" module="Sb" template="admin/content/form/email_template.phtml"/>
+		</container>
+	</body>
+</html>

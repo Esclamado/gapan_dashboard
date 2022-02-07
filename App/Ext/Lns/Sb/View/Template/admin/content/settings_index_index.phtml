@@ -1,0 +1,305 @@
+<?php
+	use Lns\Sb\Lib\Lang\Lang;
+    $_lang = new Lang();
+?>
+<div class="row gap-20 masonry pos-r">
+	<div class="masonry-sizer col-md-6"></div>
+	<div class="masonry-item col-sm-6 col-md-6 col-lg-6">
+		<div class="bgc-white p-20 bd">
+			<form action="<?= $this->getAdminUrl('settings/action/save') ?>" method="POST">
+			    <h6 class="c-grey-900">
+					<?= $_lang->getLang('general_settings'); ?>
+				</h6>
+			    <div class="mT-30">
+		            <div class="form-group row">
+		                <label for="site_name" class="col-sm-2 col-form-label pT-10 pB-5"><?= $_lang->getLang('site_name'); ?></label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="site_name" name="site_name" value="<?= $this->getConfig('site_name') ?>"/>
+		                </div>
+		            </div>
+
+		            <div class="form-group row">
+		                <label for="site_email" class="col-sm-2 col-form-label pT-10 pB-5"><?= $_lang->getLang('site_email'); ?></label>
+		                <div class="col-sm-10">
+		                    <input type="email" class="form-control" id="site_email" name="site_email" value="<?= $this->getConfig('site_email') ?>">
+		                </div>
+		            </div>
+
+		            <div class="form-group row">
+		                <label for="site_support_email" class="col-sm-2 col-form-label pT-10 pB-5"><?= $_lang->getLang('site_support_email'); ?></label>
+		                <div class="col-sm-10">
+		                    <input type="email" class="form-control" id="site_support_email" name="site_support_email" value="<?= $this->getConfig('site_support_email') ?>">
+		                </div>
+		            </div>
+
+		            <div class="form-group row">
+		                <label for="site_copyright" class="col-sm-2 col-form-label pT-10 pB-5"><?= $_lang->getLang('site_copyright'); ?></label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="site_copyright" name="site_copyright" value="<?= $this->getConfig('site_copyright') ?>">
+		                </div>
+		            </div>
+
+		            <div class="form-group row">
+		                <label for="site_data_limit" class="col-sm-2 col-form-label pT-10 pB-5"><?= $_lang->getLang('site_data_limit'); ?></label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="site_data_limit" name="site_data_limit" value="<?= $this->getConfig('site_data_limit') ?>">
+		                </div>
+		            </div>
+		            <div class="form-group row">
+		            	<div class="col-sm-10">
+		            		<button type="submit" class="btn btn-primary"><?= $_lang->getLang('save'); ?></button>
+		            	</div>
+		           	</div>
+			    </div>
+			</form>
+		</div>
+	</div>
+
+	<div class="masonry-item col-sm-6 col-md-6 col-lg-6">
+		<div class="bgc-white p-20 bd">
+			<form action="<?= $this->getAdminUrl('settings/action/save') ?>" method="POST">
+				<h6 class="c-grey-900"><?= $_lang->getLang('api_settings'); ?></h6>
+
+				<div class="form-group">
+	                <label for="site_api_key"><?= $_lang->getLang('api_key'); ?></label>
+	                <input type="text" class="form-control" id="site_api_key" name="site_api_key" value="<?= $this->getConfig('site_api_key') ?>">
+	            </div>
+
+	            <div class="form-group">
+	                <label for="site_api_secret"><?= $_lang->getLang('api_secret'); ?></label>
+	                <input type="text" class="form-control" id="site_api_secret" name="site_api_secret" value="<?= $this->getConfig('site_api_secret') ?>">
+	            </div>
+
+	            <div class="form-group">
+	            	<label for="site_api_exp_enabled"><?= $_lang->getLang('site_api_exp_enabled'); ?></label> 
+	            	<select id="site_api_exp_enabled" name="site_api_exp_enabled" class="form-control">
+	            		<option value="1" <?= ($this->getConfig('site_api_exp_enabled') == 1) ? 'selected' : '' ?>><?= $_lang->getLang('yes'); ?></option>
+	            		<option value="0" <?= ($this->getConfig('site_api_exp_enabled') == 0) ? 'selected' : '' ?>><?= $_lang->getLang('no'); ?></option>
+	            	</select>
+	            </div>
+
+	            <div class="form-group">
+	                <label for="site_api_token_max_time"><?= $_lang->getLang('site_api_token_max_time'); ?></label>
+                    <input type="text" class="form-control" id="site_api_token_max_time" name="site_api_token_max_time" value="<?= $this->getConfig('site_api_token_max_time') ?>">
+                    <small class="form-text text-muted"><?= $_lang->getLang('site_api_token_max_time_help'); ?></small>
+	            </div>
+
+	            <div class="form-group">
+	                <label for="site_api_token_max_time"><?= $_lang->getLang('site_api_logged_id_token_max_age'); ?></label>
+                    <input type="text" class="form-control" id="site_api_logged_id_token_max_age" name="site_api_logged_id_token_max_age" value="<?= $this->getConfig('site_api_logged_id_token_max_age') ?>">
+                    <small class="form-text text-muted"><?= $_lang->getLang('site_api_logged_id_token_max_age_help'); ?></small>
+	            </div>
+
+	            <div class="form-group row">
+	            	<div class="col-sm-10">
+	            		<button type="submit" class="btn btn-primary"><?= $_lang->getLang('save'); ?></button>
+	            	</div>
+	           	</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="masonry-item col-sm-6 col-md-6 col-lg-6">
+		<div class="bgc-white p-20 bd">
+			<form action="<?= $this->getAdminUrl('settings/action/save') ?>" method="POST">
+			    <h6 class="c-grey-900"><?= $_lang->getLang('seo_meta_settings'); ?></h6>
+			    <div class="mT-30">
+		            <div class="form-group row">
+		                <label for="site_meta_keywords" class="col-sm-2 col-form-label pT-10 pB-5"><?= $_lang->getLang('site_meta_keywords'); ?></label>
+		                <div class="col-sm-10">
+		                	<textarea class="col-12 pT-10 pB-5 form-control" rows="5" id="site_meta_keywords" name="site_meta_keywords"><?= $this->getConfig('site_meta_keywords') ?></textarea>
+		                </div>
+		            </div>
+		            <div class="form-group row">
+		                <label for="site_meta_description" class="col-sm-2 col-form-label pT-10 pB-5"><?= $_lang->getLang('site_meta_description'); ?></label>
+		                <div class="col-sm-10">
+		                	<textarea class="col-12 pT-10 pB-5 form-control" rows="5" id="site_meta_description" name="site_meta_description"><?= $this->getConfig('site_meta_description') ?></textarea>
+		                </div>
+		            </div>
+		            <div class="form-group row">
+		            	<div class="col-sm-10">
+		            		<button type="submit" class="btn btn-primary"><?= $_lang->getLang('save'); ?></button>
+		            	</div>
+		           	</div>
+			    </div>
+			</form>
+		</div>
+	</div>
+
+	<div class="masonry-item col-sm-6 col-md-6 col-lg-6">
+		<div class="bgc-white p-20 bd">
+			<form action="<?= $this->getAdminUrl('settings/action/save') ?>" method="POST">
+			    <h6 class="c-grey-900"><?= $_lang->getLang('facebook'); ?></h6>
+			    <div class="mT-30">
+		            <div class="form-group row">
+		                <label for="site_facebook_api_key" class="col-sm-2 col-form-label pT-10 pB-5"><?= $_lang->getLang('api_key'); ?></label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="site_facebook_api_key" name="site_facebook_api_key" value="<?= $this->getConfig('site_facebook_api_key') ?>">
+		                </div>
+		            </div>
+		            <div class="form-group row">
+		                <label for="site_facebook_api_secret" class="col-sm-2 col-form-label pT-10 pB-5"><?= $_lang->getLang('api_secret'); ?></label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="site_facebook_api_secret" name="site_facebook_api_secret" value="<?= $this->getConfig('site_facebook_api_secret') ?>">
+		                </div>
+		            </div>
+		            <div class="form-group row">
+		            	<div class="col-sm-10">
+		            		<button type="submit" class="btn btn-primary"><?= $_lang->getLang('save'); ?></button>
+		            	</div>
+		           	</div>
+			    </div>
+			</form>
+		</div>
+	</div>
+
+	<div class="masonry-item col-sm-6 col-md-6 col-lg-6">
+		<div class="bgc-white p-20 bd">
+			<form action="<?= $this->getAdminUrl('settings/action/save') ?>" method="POST">
+			    <h6 class="c-grey-900"><?= $_lang->getLang('google'); ?></h6>
+			    <div class="mT-30">
+		            <div class="form-group row">
+		                <label for="site_google_api_key" class="col-sm-2 col-form-label pT-10 pB-5"><?= $_lang->getLang('api_key'); ?></label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="site_google_api_key" name="site_google_api_key" value="<?= $this->getConfig('site_google_api_key') ?>">
+		                </div>
+		            </div>
+		            <div class="form-group row">
+		                <label for="site_google_api_secret" class="col-sm-2 col-form-label pT-10 pB-5"><?= $_lang->getLang('api_secret'); ?></label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="site_google_api_secret" name="site_google_api_secret" value="<?= $this->getConfig('site_google_api_secret') ?>">
+		                </div>
+		            </div>
+		            <div class="form-group row">
+		            	<div class="col-sm-10">
+		            		<button type="submit" class="btn btn-primary"><?= $_lang->getLang('save'); ?></button>
+		            	</div>
+		           	</div>
+			    </div>
+			</form>
+		</div>
+	</div>
+
+	<div class="masonry-item col-sm-6 col-md-6 col-lg-6">
+		<div class="bgc-white p-20 bd">
+			<form action="<?= $this->getAdminUrl('settings/action/save') ?>" method="POST">
+			    <h6 class="c-grey-900">Firebase</h6>
+			    <div class="mT-30">
+		            <div class="form-group row">
+		                <label for="site_fcm_key" class="col-sm-2 col-form-label pT-10 pB-5">FCM API Key</label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="site_fcm_key" name="site_fcm_key" value="<?= $this->getConfig('site_fcm_key') ?>">
+		                </div>
+		            </div>
+					<div class="form-group row">
+		                <label for="site_firebase_web_api_key" class="col-sm-2 col-form-label pT-10 pB-5">Web API Key</label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="site_firebase_web_api_key" name="site_firebase_web_api_key" value="<?= $this->getConfig('site_firebase_web_api_key') ?>">
+		                </div>
+		            </div>
+					<div class="form-group row">
+		                <label for="site_firebase_project_id" class="col-sm-2 col-form-label pT-10 pB-5">Project ID</label>
+		                <div class="col-sm-10">
+		                    <input type="text" class="form-control" id="site_firebase_project_id" name="site_firebase_project_id" value="<?= $this->getConfig('site_firebase_project_id') ?>">
+		                </div>
+		            </div>
+		            <div class="form-group row">
+		            	<div class="col-sm-10">
+		            		<button type="submit" class="btn btn-primary"><?= $_lang->getLang('save'); ?></button>
+		            	</div>
+		           	</div>
+			    </div>
+			</form>
+		</div>
+	</div>
+
+	<div class="masonry-item col-sm-6 col-md-6 col-lg-6">
+		<div class="bgc-white p-20 bd">
+			<form action="<?= $this->getAdminUrl('settings/action/save') ?>" method="POST">
+			    <h6 class="c-grey-900"><?= $_lang->getLang('language_setting'); ?></h6>
+				<div class="mT-30">
+					<div class="form-group">
+						<label for="site_default_language"><?= $_lang->getLang('default_language'); ?></label> 
+						<select id="site_default_language" name="site_default_language" class="form-control">
+							<option value="en" <?= ($this->getConfig('site_default_language') == 'en') ? 'selected' : '' ?>><?= $_lang->getLang('english'); ?></option>
+						</select>
+					</div>
+		            <div class="form-group row">
+		            	<div class="col-sm-10">
+		            		<button type="submit" class="btn btn-primary"><?= $_lang->getLang('save'); ?></button>
+		            	</div>
+		           	</div>
+			    </div>
+			</form>
+		</div>
+	</div>
+	<div class="masonry-item col-sm-6 col-md-6 col-lg-6">
+		<div class="bgc-white p-20 bd">
+			<form action="<?= $this->getAdminUrl('settings/action/save') ?>" method="POST" enctype="multipart/form-data">
+			    <h6 class="c-grey-900"><?= $_lang->getLang('site_images'); ?></h6>
+			    <div class="mT-30">
+		            <div class="form-group row">
+		                <label for="site_favicon" class="col-sm-2 col-form-label pT-10 pB-5"><?= $_lang->getLang('favicon'); ?></label>
+		                <div class="site-images col-sm-10">
+			                <?php if($this->getConfig('site_favicon')): ?>
+			                	<img src="<?= $this->getImageUrl([
+			                		'vendor' => 'Lns',
+			                		'module' => 'Sb',
+			                		'path' => 'images/uploads',
+			                		'filename' => $this->getConfig('site_favicon')
+			                	]); ?>">
+			            	<?php endif ?>
+		                	<div id="favicon-placeholder"></div>
+		                </div>
+		            </div>
+		            <div class="form-group row">
+		                <label for="site_logo" class="col-sm-2 col-form-label pT-10 pB-5"><?= $_lang->getLang('logo'); ?></label>
+		                <div class="site-images col-sm-10">
+			                <?php if($this->getConfig('site_favicon')): ?>
+			                	<img src="<?= $this->getImageUrl([
+			                		'vendor' => 'Lns',
+			                		'module' => 'Sb',
+			                		'path' => 'images/uploads',
+			                		'filename' => $this->getConfig('site_logo'),
+			                		'resize' => [
+										'type' => 'towidth',
+										'width' => '150',
+										'allow_enlarge' => 0
+									]
+			                	]); ?>">
+			            	<?php endif ?>
+		                	<div id="logo-placeholder"></div>
+		                </div>
+		            </div>
+		            <div class="form-group row">
+		            	<div class="col-sm-10">
+		            		<button id="site-images" type="submit" class="btn btn-primary"><?= $_lang->getLang('save'); ?></button>
+		            	</div>
+		           	</div>
+			    </div>
+			</form>
+		</div>
+	</div>
+
+	<?= $this->getChildHtml() ?>
+</div>
+<script type="text/javascript">
+	require([
+		'jquery',
+		'lns/sb/js/uploaderjs/image_upload.min'
+	], function($, _iu){
+		_iu
+		.setUrl('<?= $this->getAdminUrl('settings/action/save') ?>')
+		.setPlaceholder('#favicon-placeholder')
+		.setInputName('site_favicon')
+		.setPlaceholder('#logo-placeholder')
+		.setInputName('site_logo')
+		.render();
+
+
+		$("#site-images").on("click", function(e) { 
+			e.preventDefault();
+			_iu.startUpload();
+		});
+	});
+</script>

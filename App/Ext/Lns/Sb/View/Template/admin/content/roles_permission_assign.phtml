@@ -1,0 +1,170 @@
+<div class="row">
+	<div class="col-sm-12 col-md-12 col-lg-12">
+		<div class="clearfix mB-20">
+			<h4 class="c-grey-900 mB-0 pull-left">Assign role permission</h4>
+		</div>
+	</div>
+</div>
+
+<?php
+	$role = $this->getRole();
+	$roleId = $role->getData('id');
+?>
+
+<div class="row">
+	<div class="col-sm-8 col-md-8 col-lg-8">
+		<div class="card bd bdrs-3 pX-30 pY-25 mB-20 mB-20">
+			<?php if($role): ?>
+				<div class="mB-20">
+					<h6 class="c-grey-900 mB-0"><?= $role->getData('name') ?></h6>
+				</div>
+
+				<?php if($roleId > 1): ?>
+					<div class="table-responsive">
+						<?php
+							$permissions = $this->getPermissions();
+						?>
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th >Permission Name</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<form action="<?= $this->getAdminUrl('roles/permission/assign/id/' . $roleId); ?>" method="POST">
+									<input type="hidden" name="role_id" value="<?= $roleId ?>">
+									<?php foreach($permissions as $key => $val): ?>
+										<?php
+											$permission = $this->getPermission($roleId, $val->getData('id'));
+										?>
+										<tr>
+											<td>
+												<?= $val->getData('name') ?>
+											</td>
+											<td>
+												<input 
+													type="hidden" 
+													name="permission[<?= $val->getData('id') ?>][permissions_id]" 
+													value="<?= $val->getData('id') ?>" 
+												/>
+
+												<div class="checkbox checkbox-square checkbox-info peers ai-c mB-15">
+													<input 
+														type="checkbox" 
+														id="permission-<?= $val->getData('id') ?>-create" 
+														name="permission[<?= $val->getData('id') ?>][create]" 
+														class="peer" 
+														value="1" 
+														<?= $this->isChecked($permission, 'create') ?>
+													/> 
+													<label 
+														for="permission-<?= $val->getData('id') ?>-create" 
+														class="peers peer-greed js-sb ai-c"
+													>
+														<span class="peer peer-greed">
+															Create
+														</span>
+													</label>
+												</div>
+
+												<div class="checkbox checkbox-square checkbox-info peers ai-c mB-15">
+													<input 
+														type="checkbox" 
+														id="permission-<?= $val->getData('id') ?>-read" 
+														name="permission[<?= $val->getData('id') ?>][read]" 
+														class="peer" 
+														value="1" 
+														<?= $this->isChecked($permission, 'read') ?>
+													/> 
+													<label 
+														for="permission-<?= $val->getData('id') ?>-read" 
+														class="peers peer-greed js-sb ai-c"
+													>
+														<span class="peer peer-greed">
+															Read
+														</span>
+													</label>
+												</div>
+
+												<div class="checkbox checkbox-square checkbox-info peers ai-c mB-15">
+													<input 
+														type="checkbox" 
+														id="permission-<?= $val->getData('id') ?>-update" 
+														name="permission[<?= $val->getData('id') ?>][update]" 
+														class="peer" 
+														value="1" 
+														<?= $this->isChecked($permission, 'update') ?>
+													/> 
+													<label 
+														for="permission-<?= $val->getData('id') ?>-update" 
+														class="peers peer-greed js-sb ai-c"
+													>
+														<span class="peer peer-greed">
+															Update
+														</span>
+													</label>
+												</div>
+
+												<div class="checkbox checkbox-square checkbox-info peers ai-c mB-15">
+													<input 
+														type="checkbox" 
+														id="permission-<?= $val->getData('id') ?>-delete" 
+														name="permission[<?= $val->getData('id') ?>][delete]" 
+														class="peer" 
+														value="1" 
+														<?= $this->isChecked($permission, 'delete') ?>
+													/> 
+													<label 
+														for="permission-<?= $val->getData('id') ?>-delete" 
+														class="peers peer-greed js-sb ai-c"
+													>
+														<span class="peer peer-greed">
+															Delete
+														</span>
+													</label>
+												</div>
+
+												<div class="checkbox checkbox-square checkbox-info peers ai-c mB-15">
+													<input 
+														type="checkbox" 
+														id="permission-<?= $val->getData('id') ?>-view" 
+														name="permission[<?= $val->getData('id') ?>][view]" 
+														class="peer" 
+														value="1" 
+														<?= $this->isChecked($permission, 'view') ?>
+													/> 
+													<label 
+														for="permission-<?= $val->getData('id') ?>-view" 
+														class="peers peer-greed js-sb ai-c"
+													>
+														<span class="peer peer-greed">
+															View
+														</span>
+													</label>
+												</div>
+												
+												
+											</td>
+										</tr>
+									<?php endforeach; ?>
+									<tr>
+										<td>
+											<button class="btn btn-primary" name="save">Save</button>
+										</td>
+									</tr>
+								</form>
+							</tbody>
+						</table>
+					</div>
+				<?php else: ?>
+					<p>Cannot set permission for <?= $role->getData('name') ?> role.</p>
+				<?php endif ?>
+			<?php else: ?>
+				<div class="mB-20">
+					<h6 class="c-grey-900 mB-0">Cannot find the role you are looking for.</h6>
+				</div>
+			<?php endif ?>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,264 @@
+<?php 
+    $_user = $this->getSingleUser(); 
+	$_user_roles = $this->getRoles();
+
+	$_regions = $this->getRegions();
+
+	$_userProfile = $_address = $_contact = null;
+	if($_user){
+		$_userProfile = $_user->getUserProfile();
+		if($_userProfile){
+			$_address =  $_userProfile->getAddress();
+			$_contact =  $_userProfile->getContact();
+		}
+		if($_contact){
+			if(count($_contact) > 0) {
+				$_contact = $_contact[0];
+			}
+		}
+	}
+?>
+
+<div class="row">
+	<div class="col-md-12">
+        <div class="clearfix mb-3">
+			<h4 class="c-grey-900 mb-3">Users</h4>	
+		</div>
+    </div>
+    <div class="col-md-8">
+        <div class="card bd bdrs-3 pX-30 pY-25 mb-3 mb-3">
+            <form id="needs-validation" novalidate action="<?= $this->getAdminUrl('/users/save'); ?>" method="POST" enctype="multipart/form-data" >
+            	<input value="<?= !empty($_user)?$_user->getData('id'):''; ?>" name="id" type="hidden">
+
+				<h6 class="c-grey-900 mb-3">Account Information</h6>
+				<div class="row mb-4">
+					<div class="col-md-6 form-group">
+						<label for="input-email">Email</label> 
+						<input 
+							value="<?= $this->getFieldValue($_user, 'email') ?>" 
+							name="email" 
+							type="email" 
+							class="form-control" 
+							id="input-email" 
+							placeholder="Enter email" 
+							required
+						/>
+					</div>
+					<div class="col-md-6 form-group">
+						<label for="validationCustom01">Password</label> 
+						<input 
+							value="" 
+							name="password" 
+							type="password" 
+							class="form-control" 
+							id="validationCustom01" 
+							placeholder="Password"
+						/>
+					</div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="validationCustom02">Role</label> 
+                        <select name="user_role_id" class="form-control" id="validationCustom02" required>
+                            <option value="" disabled selected> Select Role</option>
+                            <?php if(count($_user_roles['datas']) > 0): ?>
+                            <?php
+                            	$value = $this->getFieldValue($_user, 'user_role_id');
+                            ?>
+                                <?php foreach($_user_roles['datas'] as $_role): ?>
+                                    <option 
+                                    	value="<?= $_role->getData('id') ?>" 
+                                    	<?= ($value == $_role->getData('id')) ? 'selected="selected"' : '' ?>>
+                                    	<?= $_role->getData('name') ?>
+                                    </option>
+                                <?php endforeach ?>
+                            <?php endif ?>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="input-status">Status</label> 
+                        <select name="status" class="form-control" id="input-status">
+                        	<?php
+                            	$value = $this->getFieldValue($_user, 'status');
+                            ?>
+                            <option value="1" <?= ($value == 1) ? 'selected="selected"' : ''; ?>>Active</option>
+                            <option value="0" <?= ($value == 0) ? 'selected="selected"' : ''; ?>>Disabled</option>
+                        </select>
+                    </div>
+				</div>
+
+				<h6 class="c-grey-900 mb-3">Personal Information</h6>
+				<div class="row mb-4">
+					<div class="col-md-6 form-group">
+						<input type="hidden" name="redirectTo" value="/users">
+						<label for="input-firstname">First name</label> 
+						<input 
+							value="<?= $this->getFieldValue($_userProfile, 'first_name'); ?>" 
+							name="first_name" 
+							type="text" 
+							class="form-control" 
+							id="input-firstname" 
+							placeholder="First name" 
+							required
+						/>
+					</div>
+					<div class="col-md-6 form-group">
+						<label for="input-lastname">Last name</label> 
+						<input 
+							value="<?= $this->getFieldValue($_userProfile, 'last_name'); ?>" 
+							name="last_name" 
+							type="text" 
+							class="form-control" 
+							id="input-lastname" 
+							placeholder="Last name" 
+							required
+						/>
+					</div>
+					<div class="col-md-6 form-group">
+						<label for="input-birthdate">Birthday</label>  
+						<input 
+							value="<?= $this->getFieldValue($_userProfile, 'birthdate'); ?>" 
+							name="birthdate" 
+							type="text" 
+							class="form-control" 
+							id="input-birthdate" 
+							placeholder="0000-00-00" 
+							data-provide="datepicker" 
+							data-date-format="yyyy-mm-dd" 
+						/>
+					</div>
+					<div class="col-md-6 form-group">
+						<label for="input-gender">Gender</label> 
+						<select name="gender" name="type" class="form-control" id="input-gender" required>
+							<option <?= $this->getFieldValue($_userProfile, 'gender') == 'male' ? 'selected':'' ?> value="male">Male</option>
+							<option <?= $this->getFieldValue($_userProfile, 'gender') == 'female' ? 'selected':'' ?> value="female">Female</option>
+						</select>
+					</div>
+				</div>
+
+				
+				<h6 class="c-grey-900 mb-3">Contact Information</h6>
+				<div class="row">
+					<div class="col-md-8 form-group">
+						<label for="input-address">Address</label> 
+						<input 
+							value="<?= $this->getFieldValue($_address, 'address'); ?>" 
+							name="address" 
+							type="text" 
+							class="form-control" 
+							id="input-address" 
+							placeholder="Building No. / House No. / Street" 
+						/>
+						<div class="invalid-feedback">Please provide a valid city.</div>
+					</div>
+
+					<div class="col-md-4 form-group">
+						<label for="input-city">City</label> 
+						<input 
+							type="text" 
+							id="input-city" 
+							name="city"
+							class="form-control" 
+							placeholder="City"
+							value="<?= $this->getFieldValue($_address, 'address_city'); ?>"
+						/>
+						<div class="invalid-feedback">Please provide a valid city.</div>
+					</div>
+
+					<div class="col-md-4 form-group">
+						<label for="inputPostalCode">Zip</label> 
+						<input 
+							value="<?= $this->getFieldValue($_address, 'zip_code'); ?>" 
+							name="zip_code" 
+							type="text" 
+							class="form-control" 
+							id="inputPostalCode" 
+							placeholder="Zip" 
+						/>
+						<div class="invalid-feedback">Please provide a valid zip.</div>
+					</div>
+
+					<div class="col-md-4 form-group">
+						<label for="inputState">State</label>
+						<input 
+							value="<?= $this->getFieldValue($_address, 'state'); ?>"  
+							name="state" 
+							type="text" 
+							class="form-control" 
+							id="inputState" 
+						/>
+						<div class="invalid-feedback">Please provide a valid state.</div>
+					</div>
+
+					<div class="col-md-4 form-group">
+						<label for="inputCountry">Country</label> 
+						<input 
+							value="<?= $this->getFieldValue($_address, 'country_id'); ?>"  
+							name="country_id" 
+							type="text" 
+							class="form-control" 
+							id="inputCountry" 
+						/>
+						<div class="invalid-feedback">Please provide a valid country.</div>
+					</div>
+
+					<div class="col-md-4 form-group">
+						<label for="input-mobile-number">Mobile Number</label> 
+						<input 
+							value="<?= $this->getFieldValue($_contact, 'number'); ?>" 
+							name="number" 
+							type="text" 
+							class="form-control" 
+							id="input-mobile-number" 
+							placeholder="639171112233" 
+						/>
+					</div>
+
+					<div class="col-md-4 form-group">
+						<label for="input-phone-type">Phone Type</label> 
+						<?php
+                        	$value = $this->getFieldValue($_contact, 'type');
+                        ?>
+						<select name="type" class="form-control" id="input-phone-type" required>
+							<option value="home" <?= $value == 'home'?'selected':''; ?> >Home</option>
+							<option value="personal" <?= $value == 'personal'?'selected':''; ?> >Personal</option>
+							<option value="office" <?= $value == 'office'?'selected':''; ?> >Office</option>
+						</select>
+					</div>
+				</div>
+
+				<?php $this->getChildHtml(); ?>
+
+				<button class="btn btn-primary float-right" type="submit"><?= !empty($_user)?'Save Changes':'Create' ?></button>
+			</form>
+        </div>
+    </div>
+	<div class="col-md-4">
+		<div class="card bd bdrs-3 pX-30 pY-25 mB-20 clearfix">
+			<h6 class="c-grey-900 mb-3">User Roles</h6>
+			<div class="row">
+				<div class="col-md-12">
+					<?php if(count($_user_roles['datas']) > 0){ ?>
+						<?php foreach($_user_roles['datas'] as $_role){ ?>
+							<div class="ca_capsule ca_user_role_1 forWidth"><?= $_role->getData('name') ?></div>
+							<div class="updates">
+								<p><?= $_role->getData('description') ?></p>
+							</div>
+						<?php } ?>
+					<?php } else{ ?>
+						
+					<?php } ?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	requirejs([
+		'lns/sb/admin/js/user/user'
+	], function(user){
+        var u = new user();
+	});
+</script>
+

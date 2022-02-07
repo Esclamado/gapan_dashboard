@@ -1,0 +1,66 @@
+Updates:
+\Lns\Sb\View\admin\css\datatables\datatables.less
+	- change image sorter url so that it can be load my Opoink image controller
+	- alignment on thead of datatables to center
+
+\Lns\Sb\View\admin\js\bundle.js
+	- minified
+
+\Lns\Sb\View\admin\js\vendor.js
+	- minified
+
+\Lns\Sb\View\Layout\Admin\default.xml
+	- remove datatable on css markup
+
+\Lns\Sb\View\Template\admin\head.phtml
+	- remove inline datatable css because it was already set on the datatables.less, which is included on default.less
+
+\Lns\Sb\Controller\Api\Token\Get.php
+	- public function run().
+	- change the validation of appKey from direct fetch from param to generated token from client.
+
+\Lns\Sb\Lib\Token\Validate.php
+	- public function validateClientToken($param), new function that will validate token from untrusted request like angular, ember, ionic etc.
+	- protected function getBearer(), new function to get authorization bearer from global variables
+	- protected function validateTimeZone($tzoffset, $tzname), new function that will validate time zone from client token
+
+\Lns\Sb\Lib\Token\Jwt.php
+	- public function setKey($key), set the key from site config that can be updated in admin panel
+	- setSiteConfig($siteConfig), set the site config into jwt class
+	- setLang($lang), set the language used in site
+	- setExpiration($expiration, $claim=true), add param claim
+
+\Lns\Sb\View\Template\admin\content\settings_index_index.phtml
+	- add field site_api_token_max_time
+
+\Lns\Sb\Lib\Entity\Db\DeviceToken.php
+	- registerDevice($appkey,$device_token), change the way the registration is saved
+
+\Lns\Sb\Lib\Lang\lang\en.php
+	- api_expired_token added
+
+\Lns\Sb\Controller\Api\User\Register.php
+	- run(), modify token validation
+	- register($payload,$email,$hashedPassword,$signupForm), change get device token condition
+
+Lns\Sb\Controller\Api\AllFunction.php
+	- updatejwt($id,$aud,$token), change static values from site settings values
+
+Validation of token was been changed in all API controllers
+
+Renamed:
+\Lns\Sb\View\admin\css\datatables\datatables.css to \Lns\Sb\View\admin\css\datatables\datatables.less
+	- inorder to include this css file into default.less file I need to rename it as .less file
+	- also to prevent loading of multiple css on every page load.
+	- this was already included in default.less file
+
+
+Removed Files:
+\Lns\Sb\View\admin\css\datatables\datatables.min.css
+	- this was only a duplicate of datatables.css
+
+
+ToDo For next release:
+To delete if not conflicts:
+	- \Lns\Sb\View\admin\js\bundle_bu.js
+	- \Lns\Sb\View\admin\js\vendor_bu.js

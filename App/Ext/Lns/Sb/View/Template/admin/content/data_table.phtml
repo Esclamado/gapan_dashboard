@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="clearfix mB-20">
+			<h4 class="c-grey-900 mB-0 pull-left"><?= $this->getDataTitle(); ?></h4>	
+			<a href="<?= $this->getDataAddButtonLink(); ?>">
+				<button type="button" class="btn cur-p btn-success pull-right">
+					<?= $this->getDataAddButtonName(); ?>
+				</button>
+			</a>
+		</div>
+        <div class="card bd bdrs-3 pX-30 pY-25 mB-20 mB-20">
+            <h6 class="c-grey-900 mB-20"><?= $this->getDataTitle(); ?> List</h6>
+            <table class="table table-striped" id="myTable">
+                <thead>
+                    <tr>
+                    	<?php foreach($this->getTableColumns() as $keyTc => $valTc): ?>
+	                        <th scope="col" <?= $valTc['attr'] ?>><?= $valTc['name'] ?></th>
+                    	<?php endforeach ?>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+	require([
+		'lns/sb/admin/js/datatable'
+	], function(datatable){
+        var i = new datatable();
+        i.setVar('processing', true);
+        i.setVar('serverSide', true);
+        i.setVar('ordering', true);
+        i.setVar('limit', '<?= $this->_controller->_siteConfig->getData('site_data_limit', '10') ?>');
+        i.setVar('start', '<?= $this->getStart() ?>');
+        i.setVar('ajax', '<?= $this->getDataListLink() ?>');
+		i.init();
+	});
+</script>

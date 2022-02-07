@@ -1,0 +1,31 @@
+/Lns/Sb/Lib/Session/Session.php
+	- setLoginTimeOut($expiration)	=	function
+		- depreacated, must be removed on future releases.
+
+	- setAsLoggedIn($userId, $remember = false, $expiration = 0)	=	function
+		- $userId change to $user instead.
+		- $expiration param removed.
+		- set cookie instead of using session, this case we can re login the user though the machine was been shutdown.
+		- setAsLogout(), force expire the cookie, remove the cookie on the users browser.
+
+/Lns/Sb/Controller/Admin/Login/Auth/Index.php
+	- $this->_session->setAsLoggedIn($user, $this->remember) 	=	function call
+		- call to a function, $expiration is removed.
+
+
+/Lns/Sb/View/Template/admin/defaultmenus.phtml
+	- open menu if on current page
+
+
+/Lns/Sb/Lib/Lang/lang/en.php
+	- email_from_name added
+	- email_from_name_placeholder added
+
+/Lns/Sb/View/Template/admin/content/form/email_template.phtml
+	- add field from_name
+
+/Lns/Sb/Schema/Install.php
+	- createEmailTemplateTable() add from_name
+
+/Lns/Sb/Controller/Admin/Settings/Templates/Listing.php
+	- add from_name from list

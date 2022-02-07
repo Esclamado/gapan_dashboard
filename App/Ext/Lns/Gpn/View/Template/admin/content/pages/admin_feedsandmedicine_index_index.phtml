@@ -1,0 +1,53 @@
+<?php
+use Lns\Sb\Lib\Lang\Lang;
+$houses = $this->_house->getHouses();
+$_lang = new Lang();
+?>
+<div class="row">
+  	<div class="col-lg-6">
+		<div class="clearfix mB-20">
+			<h4 class="c-grey-900 mB-0 pull-left">
+			Feeds and Medicine Consumption
+			</h4>
+		</div>
+		<span>This month of <?= date('F Y'); ?></span>
+	</div>
+	<div class="col-lg-4">	
+		<a href="<?= $this->getAdminUrl('') ?>">
+			<button type="button" class="btn cur-p btn-success pull-right">
+			View Archived Records
+			</button>
+		</a>
+	</div>
+	<div class="col-lg-2">
+		<a href="<?= $this->getAdminUrl('/feedsandmedicine/action/add') ?>">
+			<button type="button" class="btn cur-p btn-success pull-right">
+			Add new monthly record
+			</button>
+		</a>
+	</div>
+</div>
+<div class="row">
+	<?php foreach ($houses as $house) : 
+		$hasRecordForThisMonth = $this->_dailyhouseharvest->hasRecordForThisMonth($house->getData('id'));
+		if($hasRecordForThisMonth){ ?>
+			<div class="col-lg-3">
+				<div class="card card-design" style="width: 16rem;">
+					<div class="card-body">
+						<h5 class="house-number">House/Building no. <?= $house->getData('id') ?></h5>
+						<h6 class="daily-report">Daily House Report 12/30</h6>
+						<h3 class="last-updated">Last Updated: August 31, 2019</h3>
+						<div class="bottom-line"></div>
+						<h5>
+							<a href="<?= $this->getAdminUrl('/feedsandmedicine/action/listing') ?>" class="view-details">
+								View details
+							</a>
+						</h5>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+	<?php endforeach ?>
+</div>
+		
+

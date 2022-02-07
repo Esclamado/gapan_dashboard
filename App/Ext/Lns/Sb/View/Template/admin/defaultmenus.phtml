@@ -1,0 +1,160 @@
+<?php 
+	use Of\Session\Session;
+	use Lns\Sb\Lib\Lang\Lang;
+	$session = new Session();
+	$_lang = new Lang();
+
+	$pageName = $this->_controller->getPageName();
+?>
+
+<li class="nav-item my-2">
+	<a class="sidebar-link <?= $pageName == 'admin_index_index_index' ? 'open' : '' ?>" href="<?= $this->getAdminUrl() ?>">
+		<span class="icon-holder"><i class="text-success ti-home"></i> </span>
+		<span class="title"><?= $_lang->getLang('dashboard'); ?></span>
+	</a>
+</li>
+
+<?= $this->getChildHtml(); ?>
+
+<?php
+	$canViewUser = $this->_controller->checkPermission('MANAGEROLE', \Lns\Sb\Lib\Permission::VIEW);
+	$canAddUser = $this->_controller->checkPermission('MANAGEROLE', \Lns\Sb\Lib\Permission::CREATE);
+?>
+<?php if($canViewUser || $canAddUser): ?>
+	<?php
+		$open = '';
+		if(
+			$pageName == 'admin_users_index_index' || 
+			$pageName == 'admin_users_create_index' || 
+			$pageName == 'admin_users_edit_index'
+		){
+			$open = 'open';
+		}
+	?>
+	<li class="nav-item dropdown my-2 <?= $open ?>">
+		<a class="sidebar-link" href="javascript:void(0)">
+			<span class="icon-holder"><i class="text-success ti-user"></i> </span>
+			<span class="title"><?= $_lang->getLang('users'); ?></span>
+			<span class="arrow"><i class="ti-angle-right"></i></span>
+		</a>
+		<ul class="dropdown-menu">
+			<?php if($canViewUser): ?>
+				<li>
+					<a class="sidebar-link" href="<?= $this->getAdminUrl('/users') ?>"><?= $_lang->getLang('manage_users'); ?></a>
+				</li>
+			<?php endif; ?>
+			<?php if($canAddUser): ?>
+				<li>
+					<a class="sidebar-link" href="<?= $this->getAdminUrl('/users/create') ?>"><?= $_lang->getLang('add_user'); ?></a>
+				</li>
+			<?php endif; ?>
+		</ul>
+	</li>
+<?php endif; ?>
+
+<?php
+	$canViewRole = $this->_controller->checkPermission('MANAGEROLE', \Lns\Sb\Lib\Permission::VIEW);
+	$canViewPermission = $this->_controller->checkPermission('MANAGEPERMISSIONS', \Lns\Sb\Lib\Permission::VIEW);
+?>
+<?php if($canViewRole || $canViewPermission): ?>
+	<?php
+		$open = '';
+		if(
+			$pageName == 'admin_roles_index_index' || 
+			$pageName == 'admin_roles_action_edit' || 
+			$pageName == 'admin_roles_action_add' || 
+			$pageName == 'admin_roles_permission_assign' ||
+			$pageName == 'admin_permissions_action_edit' || 
+			$pageName == 'admin_permissions_action_add'
+		){
+			$open = 'open';
+		}
+	?>
+	<li class="nav-item dropdown my-2 <?= $open ?>">
+		<a class="sidebar-link" href="javascript:void(0)">
+			<span class="icon-holder"><i class="text-success ti-eye"></i> </span>
+			<span class="title"><?= $_lang->getLang('role_permission'); ?></span>
+			<span class="arrow"><i class="ti-angle-right"></i></span>
+		</a>
+		<ul class="dropdown-menu">
+			<?php if($canViewRole): ?>
+				<li>
+					<a class="sidebar-link" href="<?= $this->getAdminUrl('/roles') ?>"><?= $_lang->getLang('roles'); ?></a>
+				</li>
+			<?php endif; ?>
+			<?php if($canViewPermission): ?>
+				<li>
+					<a class="sidebar-link" href="<?= $this->getAdminUrl('/permissions') ?>"><?= $_lang->getLang('permissions'); ?></a>
+				</li>
+			<?php endif; ?>
+		</ul>
+	</li>
+<?php endif; ?>
+
+<?php
+	$canViewCms = $this->_controller->checkPermission('MANAGECMS', \Lns\Sb\Lib\Permission::VIEW);
+	$canAddCms = $this->_controller->checkPermission('MANAGECMS', \Lns\Sb\Lib\Permission::CREATE);
+?>
+<?php if ($canViewCms || $canAddCms) : ?>
+	<?php
+		$open = '';
+		if(
+			$pageName == 'admin_cms_index_index' || 
+			$pageName == 'admin_cms_action_add'  || 
+			$pageName == 'admin_cms_action_edit'
+		){
+			$open = 'open';
+		}
+	?>
+	<li class="nav-item dropdown my-2 <?= $open ?>">
+		<a class="sidebar-link" href="javascript:void(0)">
+			<span class="icon-holder"><i class="text-success ti-layout"></i> </span>
+			<span class="title"><?= $_lang->getLang('cms'); ?></span>
+			<span class="arrow"><i class="ti-angle-right"></i></span>
+		</a>
+		<ul class="dropdown-menu">
+			<?php if($canViewCms): ?>
+				<li>
+					<a class="sidebar-link" href="<?= $this->getAdminUrl('/cms') ?>"><?= $_lang->getLang('manage_cms'); ?></a>
+				</li>
+			<?php endif; ?>
+			<?php if($canAddCms): ?>
+				<li>
+					<a class="sidebar-link" href="<?= $this->getAdminUrl('/cms/action/add') ?>"><?= $_lang->getLang('add_cms'); ?></a>
+				</li>
+			<?php endif; ?>
+		</ul>
+	</li>
+<?php endif; ?>
+
+<?php 
+	$canViewSettings = $this->_controller->checkPermission('MANAGESITESETTINGS', \Lns\Sb\Lib\Permission::VIEW); 
+?>
+<?php if($canViewSettings): ?>
+	<?php
+		$open = '';
+		if(
+			$pageName == 'admin_settings_index_index' || 
+			$pageName == 'admin_settings_templates_index' || 
+			$pageName == 'admin_settings_templates_add' || 
+			$pageName == 'admin_settings_templates_edit'
+		){
+			$open = 'open';
+		}
+	?>
+	<li class="nav-item dropdown my-2 <?= $open ?>">
+		<a class="sidebar-link" href="javascript:void(0)">
+			<span class="icon-holder"><i class="text-success ti-settings"></i> </span>
+			<span class="title"><?= $_lang->getLang('settings'); ?></span>
+			<span class="arrow"><i class="ti-angle-right"></i></span>
+		</a>
+		<ul class="dropdown-menu">
+			<li>
+				<a class="sidebar-link" href="<?= $this->getAdminUrl('/settings') ?>"><?= $_lang->getLang('general_settings'); ?></a>
+			</li>
+			<li>
+				<a class="sidebar-link" href="<?= $this->getAdminUrl('/settings/templates') ?>"><?= $_lang->getLang('email_templates'); ?></a>
+			</li>
+		</ul>
+	</li>
+<?php endif; ?>
